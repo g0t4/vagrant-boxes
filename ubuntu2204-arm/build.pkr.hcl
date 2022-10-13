@@ -48,6 +48,7 @@ source "parallels-iso" "ubuntu2204-arm" {
     "<enter>",
     "boot",
     "<enter><wait>",
+    "<wait4m>"
   ]
 
 }
