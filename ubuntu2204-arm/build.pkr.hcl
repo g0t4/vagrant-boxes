@@ -70,7 +70,9 @@ build {
     ]
   }
 
-  post-processor "vagrant" {}
+  post-processor "vagrant" {
+    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # default: "packer_{{.BuildName}}_{{.Provider}}.box"
+  }
 
 }
 
