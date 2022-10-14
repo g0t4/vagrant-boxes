@@ -7,8 +7,12 @@ packer {
   }
 }
 
+variable "autoinstall_wait" {
+  type = string
+  default = "<wait2m>"
+}
 variable "ubuntu_slug" {
-  type = "string"
+  type = string
   default = "ubuntu2204-arm"
 }
 variable "ubuntu_iso_url" {
@@ -20,7 +24,7 @@ variable "ubuntu_iso_checksum" {
   default = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS" 
 }
 
-source "parallels-iso" "${var.ubuntu_slug}" {
+source "parallels-iso" "ubuntu-arm" {
 
   iso_url      = var.ubuntu_iso_url
   iso_checksum = var.ubuntu_iso_checksum
@@ -54,14 +58,14 @@ source "parallels-iso" "${var.ubuntu_slug}" {
     "<enter>",
     "boot",
     "<enter><wait>",
-    "<wait4m>"
+    "${autoinstall_wait}",
   ]
 
 }
 
 build {
-  sources = ["source.parallels-iso.${var.ubuntu_slug}"]
-  name    = "${var.ubuntu_slug}" 
+  sources = ["source.parallels-iso.ubuntu-arm"]
+  name    = "${var.ubuntu_slug}"
 
   provisioner "shell" {
     execute_command = "echo 'password' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
