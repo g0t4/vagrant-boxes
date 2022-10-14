@@ -52,6 +52,8 @@ source "parallels-iso" "ubuntu-arm" {
     "${var.autoinstall_wait}",
   ]
 
+  vm_name          = "build-${var.box_name}"
+  output_directory = "build-${var.box_name}"
 }
 
 build {
