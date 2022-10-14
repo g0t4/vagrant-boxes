@@ -69,6 +69,8 @@ build {
   }
 
   post-processor "vagrant" {
-    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # default: "packer_{{.BuildName}}_{{.Provider}}.box"
+    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
+    # box files: https://developer.hashicorp.com/vagrant/docs/boxes/format
+    include = ["box.info.json"]
   }
 }
