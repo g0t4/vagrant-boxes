@@ -77,8 +77,9 @@ build {
 
     # https://www.packer.io/plugins/post-processors/vagrant/vagrant
     post-processor "vagrant" {
-      output  = "out/packer_${var.box_name}_{{.Provider}}.box"
-      include = ["box.info.${var.ubuntu_version_slug}.json"]
+      output            = "out/packer_${var.box_name}_{{.Provider}}.box"
+      include           = ["${var.ubuntu_version_slug}/info.json"]
+      compression_level = 9 # default = 6
     }
 
     // # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud

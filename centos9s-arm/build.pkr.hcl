@@ -71,6 +71,7 @@ build {
   post-processor "vagrant" {
     output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
     # box files: https://developer.hashicorp.com/vagrant/docs/boxes/format
-    include = ["box.info.json"]
+    include           = ["info.json"]
+    compression_level = 9 # default = 6
   }
 }
