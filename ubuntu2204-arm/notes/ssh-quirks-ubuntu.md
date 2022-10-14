@@ -36,3 +36,8 @@
       - This would avoid holding up faster autoinstalls
     - CHECK packer config for latest values
       - I'm likely to forget to update this if I go another direction with the fix ;)...
+- links:
+  - here's a 20.04 packer example that has ssh_handshake_attempts = 20 too
+    - https://imagineer.in/blog/packer-build-for-ubuntu-20-04/
+  - large discussion of various issues with 20.04, notably the autoinstall SSH server and what people attempted:
+    - https://github.com/hashicorp/packer/issues/9115
