@@ -58,7 +58,7 @@ source "parallels-iso" "ubuntu-arm" {
     "<enter>",
     "boot",
     "<enter><wait>",
-    "${autoinstall_wait}",
+    "${var.autoinstall_wait}",
   ]
 
 }
