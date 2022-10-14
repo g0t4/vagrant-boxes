@@ -29,8 +29,7 @@ autoinstall:
         dhcp4: true
     version: 2
   early-commands:
-    # disable ssh so packer doesn't connect too soon and then fail when ssh keys change:
-    - systemctl stop ssh
+    - systemctl stop ssh # doesn't fully stop autoinstall SSH server but does help avoid some initial packer connections, keep in mind that the autoinstall SSH service is started again during its configuration
   ssh: # https://ubuntu.com/server/docs/install/autoinstall-reference#ssh
     allow-pw: true
     authorized-keys:
