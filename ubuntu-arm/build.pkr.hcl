@@ -75,9 +75,18 @@ build {
   post-processors {
     # note this is a chain of post-processors, NOT separte post-processors
 
+    # https://www.packer.io/plugins/post-processors/vagrant/vagrant
     post-processor "vagrant" {
       output  = "out/packer_${var.box_name}_{{.Provider}}.box"
       include = ["box.info.${var.ubuntu_version_slug}.json"]
+    }
+
+    # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud
+    post-processor "vagrant-cloud" {
+      box_tag = "wesdemos/${var.box_name}"
+      version = "1.0.0"
+      no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
+      # version_description = "initial release"
     }
 
   }
