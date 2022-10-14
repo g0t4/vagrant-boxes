@@ -72,9 +72,14 @@ build {
     ]
   }
 
-  post-processor "vagrant" {
-    output  = "out/packer_${var.box_name}_{{.Provider}}.box"
-    include = ["box.info.${var.ubuntu_version_slug}.json"]
+  post-processors {
+    # note this is a chain of post-processors, NOT separte post-processors
+
+    post-processor "vagrant" {
+      output  = "out/packer_${var.box_name}_{{.Provider}}.box"
+      include = ["box.info.${var.ubuntu_version_slug}.json"]
+    }
+
   }
 
 }
