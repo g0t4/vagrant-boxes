@@ -9,6 +9,7 @@ packer {
 
 variables {
   autoinstall_wait    = "<wait2m>"
+  ubuntu_version_slug = "2204"
   box_name            = "ubuntu2204-arm"
   ubuntu_iso_url      = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso"
   ubuntu_iso_checksum = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS"
@@ -73,7 +74,7 @@ build {
 
   post-processor "vagrant" {
     output  = "out/packer_${var.box_name}_{{.Provider}}.box"
-    include = ["box.info.${var.box_name}.json"]
+    include = ["box.info.${var.ubuntu_version_slug}.json"]
   }
 
 }
