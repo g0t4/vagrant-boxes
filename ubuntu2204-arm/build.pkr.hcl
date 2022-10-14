@@ -22,9 +22,11 @@ source "parallels-iso" "ubuntu2204-arm" {
   iso_checksum = var.ubuntu_iso_checksum
 
   # packer's ssh communicator config => packer (builders, provisioners, etc) connect as:
+  # https://www.packer.io/docs/communicators/ssh
   ssh_username = "vagrant"
   ssh_password = "password"
   ssh_timeout  = "20m"
+  ssh_handshake_attempts = 20 # see notes on troubleshooting for details about SSH quirks with ubuntu's autoinstall SSH server
 
   parallels_tools_flavor = "lin-arm"
   shutdown_command       = "echo 'password' | sudo -S shutdown -P now"
