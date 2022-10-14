@@ -7,6 +7,10 @@ packer {
   }
 }
 
+variable "ubuntu_slug" {
+  type = "string"
+  default = "ubuntu2204-arm"
+}
 variable "ubuntu_iso_url" {
   type = string
   default = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso" 
@@ -16,7 +20,7 @@ variable "ubuntu_iso_checksum" {
   default = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS" 
 }
 
-source "parallels-iso" "ubuntu2204-arm" {
+source "parallels-iso" "${var.ubuntu_slug}" {
 
   iso_url      = var.ubuntu_iso_url
   iso_checksum = var.ubuntu_iso_checksum
@@ -56,8 +60,8 @@ source "parallels-iso" "ubuntu2204-arm" {
 }
 
 build {
-  sources = ["source.parallels-iso.ubuntu2204-arm"]
-  name    = "ubuntu2204-arm"
+  sources = ["source.parallels-iso.${var.ubuntu_slug}"]
+  name    = "${var.ubuntu_slug}" 
 
   provisioner "shell" {
     execute_command = "echo 'password' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
