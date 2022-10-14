@@ -81,13 +81,13 @@ build {
       include = ["box.info.${var.ubuntu_version_slug}.json"]
     }
 
-    # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud
-    post-processor "vagrant-cloud" {
-      box_tag = "wesdemos/${var.box_name}"
-      version = "1.0.0"
-      no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
-      # version_description = "initial release"
-    }
+    // # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud
+    // post-processor "vagrant-cloud" {
+    //   box_tag = "wesdemos/${var.box_name}"
+    //   version = "1.0.0"
+    //   no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
+    //   # version_description = "initial release"
+    // }
 
   }
 
