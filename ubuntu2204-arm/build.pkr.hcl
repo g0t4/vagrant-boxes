@@ -8,20 +8,20 @@ packer {
 }
 
 variable "autoinstall_wait" {
-  type = string
+  type    = string
   default = "<wait2m>"
 }
 variable "ubuntu_slug" {
-  type = string
+  type    = string
   default = "ubuntu2204-arm"
 }
 variable "ubuntu_iso_url" {
-  type = string
-  default = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso" 
+  type    = string
+  default = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso"
 }
 variable "ubuntu_iso_checksum" {
-  type = string
-  default = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS" 
+  type    = string
+  default = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS"
 }
 
 source "parallels-iso" "ubuntu-arm" {
@@ -31,9 +31,9 @@ source "parallels-iso" "ubuntu-arm" {
 
   # packer's ssh communicator config => packer (builders, provisioners, etc) connect as:
   # https://www.packer.io/docs/communicators/ssh
-  ssh_username = "vagrant"
-  ssh_password = "password"
-  ssh_timeout  = "20m"
+  ssh_username           = "vagrant"
+  ssh_password           = "password"
+  ssh_timeout            = "20m"
   ssh_handshake_attempts = 20 # see notes on troubleshooting for details about SSH quirks with ubuntu's autoinstall SSH server
 
   parallels_tools_flavor = "lin-arm"
