@@ -11,7 +11,7 @@ variable "autoinstall_wait" {
   type    = string
   default = "<wait2m>"
 }
-variable "ubuntu_slug" {
+variable "box_name" {
   type    = string
   default = "ubuntu2204-arm"
 }
@@ -65,7 +65,7 @@ source "parallels-iso" "ubuntu-arm" {
 
 build {
   sources = ["source.parallels-iso.ubuntu-arm"]
-  name    = "${var.ubuntu_slug}"
+  name    = "${var.box_name}"
 
   provisioner "shell" {
     execute_command = "echo 'password' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
@@ -82,7 +82,7 @@ build {
   }
 
   post-processor "vagrant" {
-    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # default: "packer_{{.BuildName}}_{{.Provider}}.box"
+    output = "out/packer_${var.box_name}_{{.Provider}}.box" # default: "packer_{{.BuildName}}_{{.Provider}}.box"
   }
 
 }
