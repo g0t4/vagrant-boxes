@@ -16,7 +16,7 @@ variable "box_org" { type = string }
 variable "box_name" { type = string }
 local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
 
-variable "ubuntu_version_slug" { type = string }
+variable "box_dir" { type = string }
 variable "box_version" { type = string }
 variable "box_version_desc" { type = string }
 
@@ -85,7 +85,7 @@ build {
     # https://www.packer.io/plugins/post-processors/vagrant/vagrant
     post-processor "vagrant" {
       output            = "out/packer_${var.box_name}_{{.Provider}}.box"
-      include           = ["${var.ubuntu_version_slug}/info.json"]
+      include           = ["${var.box_dir}/info.json"]
       compression_level = 9 # default = 6
     }
 

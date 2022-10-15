@@ -6,6 +6,6 @@ autoinstall_wait = "<wait4m>"
 box_org  = "wesdemos/"
 box_name = "ubuntu2210-arm"
 
-ubuntu_version_slug = "2210"
+box_dir = "2210"
 box_version         = "1.0.0"
 box_version_desc    = "initial release"
