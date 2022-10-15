@@ -7,16 +7,17 @@ packer {
   }
 }
 
+
 variable "iso_url" { type = string }
 variable "iso_checksum" { type = string }
 
+variable "box_dir" { type = string }
 variable "autoinstall_wait" { type = string }
 
 variable "box_org" { type = string }
 variable "box_name" { type = string }
 local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
 
-variable "box_dir" { type = string }
 variable "box_version" { type = string }
 variable "box_version_desc" { type = string }
 
