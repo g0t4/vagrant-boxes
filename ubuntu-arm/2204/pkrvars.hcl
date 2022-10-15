@@ -1,5 +1,5 @@
-ubuntu_iso_url      = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso"
-ubuntu_iso_checksum = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS"
+iso_url      = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso"
+iso_checksum = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS"
 
 autoinstall_wait = "<wait2m>"
 

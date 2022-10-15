@@ -7,8 +7,8 @@ packer {
   }
 }
 
-variable "ubuntu_iso_url" { type = string }
-variable "ubuntu_iso_checksum" { type = string }
+variable "iso_url" { type = string }
+variable "iso_checksum" { type = string }
 
 variable "autoinstall_wait" { type = string }
 
@@ -22,8 +22,8 @@ variable "box_version_desc" { type = string }
 
 source "parallels-iso" "ubuntu-arm" {
 
-  iso_url      = var.ubuntu_iso_url
-  iso_checksum = var.ubuntu_iso_checksum
+  iso_url      = var.iso_url
+  iso_checksum = var.iso_checksum
 
   # packer's ssh communicator config => packer (builders, provisioners, etc) connect as:
   # https://www.packer.io/docs/communicators/ssh
