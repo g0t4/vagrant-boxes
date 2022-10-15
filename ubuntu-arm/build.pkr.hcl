@@ -7,11 +7,17 @@ packer {
   }
 }
 
-variable "autoinstall_wait" { type = string }
-variable "ubuntu_version_slug" { type = string }
-variable "box_name" { type = string }
 variable "ubuntu_iso_url" { type = string }
 variable "ubuntu_iso_checksum" { type = string }
+variable "autoinstall_wait" { type = string }
+
+variable "box_org" { type = string }
+variable "box_name" { type = string }
+local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
+
+variable "ubuntu_version_slug" { type = string }
+variable "box_version" { type = string }
+variable "box_version_desc" { type = string }
 
 source "parallels-iso" "ubuntu-arm" {
 
@@ -82,13 +88,14 @@ build {
       compression_level = 9 # default = 6
     }
 
-    // # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud
-    // post-processor "vagrant-cloud" {
-    //   box_tag = "wesdemos/${var.box_name}"
-    //   version = "1.0.0"
-    //   no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
-    //   # version_description = "initial release"
-    // }
+    # https://www.packer.io/plugins/post-processors/vagrant/vagrant-cloud
+    post-processor "vagrant-cloud" {
+      box_tag = "${local.box_tag}"
+      version = "${var.box_version}"
+      # keep_input_artifact = true # default = true
+      # no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
+      version_description = "${var.box_version_desc}"
+    }
 
   }
 

@@ -1,5 +1,8 @@
 autoinstall_wait    = "<wait4m>"
 ubuntu_version_slug = "2210"
 box_name            = "ubuntu2210-arm"
+box_version         = "1.0.0"
+box_version_desc    = "initial release"
+box_org             = "wesdemos/"
 ubuntu_iso_url      = "https://cdimage.ubuntu.com/releases/22.10/beta/ubuntu-22.10-beta-live-server-arm64.iso"
 ubuntu_iso_checksum = "file:https://cdimage.ubuntu.com/releases/22.10/beta/SHA256SUMS"
