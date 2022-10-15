@@ -7,13 +7,11 @@ packer {
   }
 }
 
-variables {
-  autoinstall_wait    = "<wait2m>"
-  ubuntu_version_slug = "2204"
-  box_name            = "ubuntu2204-arm"
-  ubuntu_iso_url      = "https://cdimage.ubuntu.com/releases/22.04.1/release/ubuntu-22.04.1-live-server-arm64.iso"
-  ubuntu_iso_checksum = "file:https://cdimage.ubuntu.com/releases/22.04.1/release/SHA256SUMS"
-}
+variable "autoinstall_wait" { type = string }
+variable "ubuntu_version_slug" { type = string }
+variable "box_name" { type = string }
+variable "ubuntu_iso_url" { type = string }
+variable "ubuntu_iso_checksum" { type = string }
 
 source "parallels-iso" "ubuntu-arm" {
 
