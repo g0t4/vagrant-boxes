@@ -1,0 +1,2 @@
+packer validate .
+packer fmt .
