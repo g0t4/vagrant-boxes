@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-
-  config.vm.box = "centos9s-arm"
-
+  config.vm.box = "test-centos9s-arm"
+  config.vm.box_url = "file://../out/packer_centos9s-arm_parallels.box"
 end
