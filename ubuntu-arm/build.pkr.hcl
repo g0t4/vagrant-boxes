@@ -9,6 +9,7 @@ packer {
 
 variable "ubuntu_iso_url" { type = string }
 variable "ubuntu_iso_checksum" { type = string }
+
 variable "autoinstall_wait" { type = string }
 
 variable "box_org" { type = string }
