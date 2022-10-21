@@ -27,15 +27,6 @@ retry() {
   return "${RESULT}"
 }
 
-# Ensure dmidecode is available.
-retry apk add dmidecode
-
-# Bail if we are not running atop VirtualBox.
-if [[ `dmidecode -s system-product-name` != "VirtualBox" ]]; then
-    exit 0
-fi
-
-# Install the Virtual Box Tools from the Linux Guest Additions ISO.
 printf "Installing the Virtual Box Tools.\n"
 
 # Add the edge package repo.
@@ -55,7 +46,7 @@ rc-update add virtualbox-guest-additions default && rc-service virtualbox-guest-
 
 # Cleanup.
 rm -rf /root/VBoxVersion.txt
-rm -rf /root/VBoxGuestAdditions.iso
+rm -rf /root/VBoxGuestAdditions.iso # TODO - is this even used?
 
 # Boosts the available entropy which allows magma to start faster.
 retry apk add haveged
