@@ -49,7 +49,17 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
     ["modifyvm", "{{ .Name }}", "--nested-paging", "off"],
     ["modifyvm", "{{ .Name }}", "--paravirt-provider", "none"],
-    # todo - can I add flags to auto record screen as its built?
+    # todo - add recording flags to VM?
+    # VBoxManage modifyvm <uuid | vmname> 
+    #   [--recording= on | off ] 
+    #   [--recording-screens= all | none | screen-ID[,screen-ID...] ] 
+    #   [--recording-file=filename]
+    #   [--recording-max-size=MB] 
+    #   [--recording-max-time=msec] 
+    #   [--recording-opts=key=value[,key=value...] ] 
+    #   [--recording-video-fps=fps] 
+    #   [--recording-video-rate=rate] 
+    #   [--recording-video-res=widthheight]
   ]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name = "alpine316-x86-virtualbox"
