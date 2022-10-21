@@ -69,9 +69,6 @@ build {
       "scripts/alpine316/vagrant.sh",
       "scripts/alpine316/sshd.sh",
       "scripts/alpine316/virtualbox.sh",
-      "scripts/alpine316/parallels.sh",
-      "scripts/alpine316/vmware.sh",
-      "scripts/alpine316/qemu.sh",
       "scripts/alpine316/cache.sh"
     ]
     start_retry_timeout = "15m"
