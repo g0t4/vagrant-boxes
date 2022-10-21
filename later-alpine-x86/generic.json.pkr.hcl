@@ -49,6 +49,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
     ["modifyvm", "{{ .Name }}", "--nested-paging", "off"],
     ["modifyvm", "{{ .Name }}", "--paravirt-provider", "none"],
+    # todo - can I add flags to auto record screen as its built?
   ]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name = "alpine316-x86-virtualbox"
