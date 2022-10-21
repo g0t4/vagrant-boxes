@@ -38,7 +38,14 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   ssh_timeout            = "3600s"
   ssh_username           = "root"
   vboxmanage = [
-    ["modifyvm", "{{ .Name }}", "--vram", "64"],
+    ["modifyvm", "{{ .Name }}", "--vram", "128"],
+    ["modifyvm", "{{ .Name }}", "--graphicscontroller", "vmsvga"],
+    ["modifyvm", "{{ .Name }}", "--cpus", 2],
+    ["modifyvm", "{{ .Name }}", "--memory", 2048],
+    ["modifyvm", "{{ .Name }}", "--audio", "none"],
+    ["modifyvm", "{{ .Name }}", "--chipset", "ich9"],
+    ["modifyvm", "{{ .Name }}", "--nested-paging", "off"],
+    ["modifyvm", "{{ .Name }}", "--paravirt-provider", "none"],
   ]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name = "alpine316-x86-virtualbox"
