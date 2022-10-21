@@ -37,7 +37,9 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   ssh_port               = 22
   ssh_timeout            = "3600s"
   ssh_username           = "root"
-  vboxmanage             = [["modifyvm", "{{ .Name }}", "--vram", "64"]]
+  vboxmanage = [
+    ["modifyvm", "{{ .Name }}", "--vram", "64"],
+  ]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name = "alpine316-x86-virtualbox"
 }
