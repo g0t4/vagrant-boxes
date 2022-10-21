@@ -75,4 +75,10 @@ build {
     timeout             = "2h0m0s"
   }
 
+  post-processor "vagrant" {
+    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
+    include           = ["info.json"]
+    compression_level = 9 # default = 6
+    #    "vagrantfile_template": "tpl/generic-{{split build_name \"-\" 1}}.rb"
+  }
 }
