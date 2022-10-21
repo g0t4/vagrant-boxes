@@ -26,12 +26,6 @@ EOF
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
-# Mark the vagrant box build time.
-date --utc > /etc/vagrant_box_build_time
-
-# Truncate the motd file.
-truncate -s 0 /etc/motd
-
 # Workaround issues with setting the hostname in older Vagrant releases.
 if [ ! -f /etc/init.d/network ]; then ln -s /etc/init.d/networking /etc/init.d/network ; fi
 if [ ! -d /etc/sysconfig/ ]; then mkdir -p /etc/sysconfig/ ; fi
