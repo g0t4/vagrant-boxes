@@ -59,8 +59,8 @@ build {
     expect_disconnect = "true"
     only              = ["alpine316-x86-virtualbox"]
     scripts = [
-      "scripts/alpine316/network.sh",
-      "scripts/alpine316/apk.sh"
+      "scripts/network.sh",
+      "scripts/apk.sh"
     ]
     start_retry_timeout = "15m"
     timeout             = "2h0m0s"
@@ -72,22 +72,22 @@ build {
     only              = ["alpine316-x86-virtualbox"]
     pause_before      = "2m0s"
     scripts = [
-      "scripts/alpine316/hostname.sh",
-      "scripts/alpine316/lsb.sh",
-      "scripts/alpine316/floppy.sh",
-      "scripts/alpine316/vagrant.sh",
-      "scripts/alpine316/sshd.sh",
-      "scripts/alpine316/virtualbox.sh",
-      "scripts/alpine316/cache.sh"
+      "scripts/hostname.sh",
+      "scripts/lsb.sh",
+      "scripts/floppy.sh",
+      "scripts/vagrant.sh",
+      "scripts/sshd.sh",
+      "scripts/virtualbox.sh",
+      "scripts/cache.sh"
     ]
     start_retry_timeout = "15m"
     timeout             = "2h0m0s"
   }
 
   post-processor "vagrant" {
-    output               = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
+    output               = "out/packer_{{.BuildName}}_{{.Provider}}.box"
     include              = ["info.json"]
-    compression_level    = 9 # default = 6
+    compression_level    = 9 
     vagrantfile_template = "template-vagrantfile.rb"
   }
 }
