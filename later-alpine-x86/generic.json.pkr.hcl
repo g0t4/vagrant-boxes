@@ -1,5 +1,6 @@
 
-source "virtualbox-iso" "generic-alpine316-virtualbox" {
+# virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
+source "virtualbox-iso" "alpine316-x86-virtualbox" {
   boot_command = [
     "<enter><wait10>",
     "root<enter><wait>",
@@ -18,39 +19,39 @@ source "virtualbox-iso" "generic-alpine316-virtualbox" {
   boot_keygroup_interval  = "1s"
   boot_wait               = "60s"
   cpus                    = 2
-  disk_size               = 131072
+  disk_size               = 131072 # 128 MB
   guest_additions_mode    = "upload"
   guest_additions_path    = "VBoxGuestAdditions.iso"
-  guest_additions_sha256  = "c987cdc8c08c579f56d921c85269aeeac3faf636babd01d9461ce579c9362cdd"
-  guest_additions_url     = "https://download.virtualbox.org/virtualbox/6.1.36/VBoxGuestAdditions_6.1.36.iso"
+  guest_additions_sha256  = "9cf5413399f59cfa4ba9ed89a9295b1b2ef3b997cb526a100637b5c59a526872" # https://download.virtualbox.org/virtualbox/7.0.2/SHA256SUMS
+  guest_additions_url     = "https://download.virtualbox.org/virtualbox/7.0.2/VBoxGuestAdditions_7.0.2.iso"
   guest_os_type           = "Linux" # 32-bit generic Linux # VBoxManage list ostypes
   hard_drive_interface    = "sata"
   headless                = true
   http_directory          = "http"
-  iso_checksum            = "sha256:6c7cb998ec2c8925d5a1239410a4d224b771203f916a18f8015f31169dd767a2"
-  iso_url                 = "https://mirrors.edge.kernel.org/alpine/v3.16/releases/x86_64/alpine-virt-3.16.2-x86_64.iso"
-  memory                  = 2048
-  output_directory        = "output/generic-alpine316-virtualbox"
+  iso_checksum            = "file:https://mirrors.edge.kernel.org/alpine/v3.16/releases/x86/alpine-virt-3.16.2-x86.iso.sha256"
+  iso_url                 = "https://mirrors.edge.kernel.org/alpine/v3.16/releases/x86/alpine-virt-3.16.2-x86.iso"
+  memory                  = 2048 # 2 GB
+  output_directory        = "output/alpine316-x86-virtualbox"
   shutdown_command        = "/sbin/poweroff"
   ssh_password            = "vagrant"
   ssh_port                = 22
   ssh_timeout             = "3600s"
   ssh_username            = "root"
   vboxmanage              = [["modifyvm", "{{ .Name }}", "--vram", "64"]]
-  virtualbox_version_file = "VBoxVersion.txt"
-  vm_name                 = "generic-alpine316-virtualbox"
+  # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
+  vm_name                 = "alpine316-x86-virtualbox"
   vrdp_bind_address       = "127.0.0.1"
   vrdp_port_max           = 12000
   vrdp_port_min           = 11000
 }
 
 build {
-  sources = ["source.virtualbox-iso.generic-alpine316-virtualbox"]
+  sources = ["source.virtualbox-iso.alpine316-x86-virtualbox"]
 
   provisioner "shell" {
     execute_command   = "/bin/sh '{{ .Path }}'"
     expect_disconnect = "true"
-    only              = ["generic-alpine316-virtualbox"]
+    only              = ["alpine316-x86-virtualbox"]
     scripts = [
       "scripts/alpine316/network.sh",
       "scripts/alpine316/apk.sh"
@@ -62,7 +63,7 @@ build {
   provisioner "shell" {
     execute_command   = "{{ .Vars }} /bin/bash '{{ .Path }}'"
     expect_disconnect = "true"
-    only              = ["generic-alpine316-virtualbox"]
+    only              = ["alpine316-x86-virtualbox"]
     pause_before      = "2m0s"
     scripts = [
       "scripts/alpine316/hostname.sh",
