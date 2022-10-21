@@ -23,7 +23,7 @@ source "virtualbox-iso" "generic-alpine316-virtualbox" {
   guest_additions_path    = "VBoxGuestAdditions.iso"
   guest_additions_sha256  = "c987cdc8c08c579f56d921c85269aeeac3faf636babd01d9461ce579c9362cdd"
   guest_additions_url     = "https://download.virtualbox.org/virtualbox/6.1.36/VBoxGuestAdditions_6.1.36.iso"
-  guest_os_type           = "Linux_64"
+  guest_os_type           = "Linux" # 32-bit generic Linux # VBoxManage list ostypes
   hard_drive_interface    = "sata"
   headless                = true
   http_directory          = "http"
