@@ -87,7 +87,7 @@ build {
   post-processor "vagrant" {
     output               = "out/packer_{{.BuildName}}_{{.Provider}}.box"
     include              = ["info.json"]
-    compression_level    = 9 
+    compression_level    = 9
     vagrantfile_template = "template-vagrantfile.rb"
   }
 }
