@@ -17,7 +17,8 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     "chroot /mnt apk add openntpd && chroot /mnt rc-update add openntpd default && reboot<enter>"
   ]
   # boot_command script choked on last long command - repetative output (after reboot) showed something about changing the root password - over and over it scrolled insanely quickly - so something on reboot is behaving - or was it? what was sending key strokes after reboot?
-  
+  # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\ VM
+
   boot_keygroup_interval = "1s"
   boot_wait              = "120s" # slow to start with x86 emulation
   cpus                   = 2
