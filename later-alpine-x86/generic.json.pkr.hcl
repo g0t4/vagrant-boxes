@@ -60,6 +60,15 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     #   [--recording-video-fps=fps] 
     #   [--recording-video-rate=rate] 
     #   [--recording-video-res=widthheight]
+    # also commands:
+    #   VBoxManage controlvm <uuid | vmname> recording <on | off>
+    #   VBoxManage controlvm <uuid | vmname> recording screens <all | none | screen-ID[,screen-ID...]>
+    #   VBoxManage controlvm <uuid | vmname> recording filename <filename>
+    #   VBoxManage controlvm <uuid | vmname> recording videores <widthxheight>
+    #   VBoxManage controlvm <uuid | vmname> recording videorate <rate>
+    #   VBoxManage controlvm <uuid | vmname> recording videofps <fps>
+    #   VBoxManage controlvm <uuid | vmname> recording maxtime <sec>
+    #   VBoxManage controlvm <uuid | vmname> recording maxfilesize <MB>
   ]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name = "alpine316-x86-virtualbox"
