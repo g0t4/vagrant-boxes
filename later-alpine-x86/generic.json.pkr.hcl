@@ -17,7 +17,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     "chroot /mnt apk add openntpd && chroot /mnt rc-update add openntpd default && reboot<enter>"
   ]
   boot_keygroup_interval = "1s"
-  boot_wait              = "60s"
+  boot_wait              = "140s" # slow to start with x86 emulation
   cpus                   = 2
   disk_size              = 131072 # 128 MB
   guest_additions_mode   = "upload"
