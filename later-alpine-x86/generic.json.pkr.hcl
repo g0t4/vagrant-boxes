@@ -76,9 +76,9 @@ build {
   }
 
   post-processor "vagrant" {
-    output            = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
-    include           = ["info.json"]
-    compression_level = 9 # default = 6
+    output               = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
+    include              = ["info.json"]
+    compression_level    = 9 # default = 6
     vagrantfile_template = "template-vagrantfile.rb"
   }
 }
