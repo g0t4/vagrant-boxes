@@ -40,9 +40,6 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   vboxmanage              = [["modifyvm", "{{ .Name }}", "--vram", "64"]]
   # todo modify arch - disable paravirt, nested paging - use ICH9 chipset
   vm_name                 = "alpine316-x86-virtualbox"
-  vrdp_bind_address       = "127.0.0.1"
-  vrdp_port_max           = 12000
-  vrdp_port_min           = 11000
 }
 
 build {
