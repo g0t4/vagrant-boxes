@@ -1,26 +1,26 @@
 #!ash
 
-# delete line # rc-service $svc start
+# disable bundled ssh service? # IIUC openssh used instead, setup below
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
 # env vars used by setup-alpine:
 export KEYMAPOPTS="us us"
-export HOSTNAMEOPTS="-n alpine316.localdomain"
+export HOSTNAMEOPTS="-n alpine316.localdomain" # set hostname
 export INTERFACESOPTS="auto lo
 iface lo inet loopback
 
 auto eth0
 iface eth0 inet dhcp
     hostname alpine316.localdomain
-"
-export DNSOPTS="-d local -n 4.2.2.1 4.2.2.2 208.67.220.220"
-export TIMEZONEOPTS="-z UTC"
+" # enable loopback + dhcp for eth0
+export DNSOPTS="-d local -n 1.1.1.1" # use cloudflare DNS (much faster on my network)
+export TIMEZONEOPTS="-z UTC" # UTC timezone
 export PROXYOPTS="none"
-export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main"
-export SSHDOPTS="-c openssh"
-export NTPOPTS="-c none"
-export ERASE_DISKS="/dev/sda"
-export DISKOPTS="-s 0 -m sys /dev/sda"
+export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main" # use "-r" for random mirror
+export SSHDOPTS="-c openssh" # install openssh
+export NTPOPTS="-c none" # disable NTP # todo NTPOPTS="-c openntpd" # install openntpd
+export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
+export DISKOPTS="-s 0 -m sys /dev/sda" # 
 
 
 printf "vagrant\nvagrant\ny\n" \
@@ -40,11 +40,12 @@ chroot /mnt rc-update add openntpd default
 
 reboot
 
-
 #### NOTES
+# - see /sbin/setup-* functions used above
+#   - `grep -A10 -B10 ERASE_DISKS /sbin/setup-*` 
+#     - find what uses what
 # - currently uses auto install via setup-alpine
 #   - https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html
 # - could also use semi-auto install
-#   = bypass setup-alpine and call out to multiple setup-X functions 
+#   = bypass setup-alpine and call out to multiple setup-X functions
 #   - https://docs.alpinelinux.org/user-handbook/0.1a/Installing/manual.html
-
