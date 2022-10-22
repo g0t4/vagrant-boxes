@@ -22,12 +22,27 @@ cat > answer_file.cfg <<"EOF"
   export NTPOPTS="-c none" # not install openntpd here (see below for alternative steps used)
   export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
   export DISKOPTS="-s 0 -m sys /dev/sda"
+
+
+  # setup-user args: (not in generic/alpine316)
+  # seems broken when using a key link... is something making network requests fail???
+  # export USERSSHKEY="https://raw.githubusercontent.com/hashicorp/vagrant/5b501a3fb05ed0ab16cf10991b3df9d231edb5cf/keys/vagrant.pub"
+  # see setup-user for args to pass
+  # -a => admin user (wheel) + doas
+  # -f fullname
+  # -g space-delimited-groups
+  # -u unlock (non interactive create user)
+  # after flags can pass username (read as $1 by setup-user)
+  #   if don't pass username then it will prompt (interactive) for one
+  export USEROPTS="-f dontcare -u dontcare" # should stop prompts for user (name, etc)
 EOF
 
 source answer_file.cfg
 
 # start alpine's auto install
 # - passing root password = vagrant
+# todo is passing y an issue? 
+#  I believe networking failures led to extra prompts so need to test w/o ipv6 before determine if y isn't needed here:
 printf "vagrant\nvagrant\ny\n" \
   | sh /sbin/setup-alpine -f /root/answer_file.cfg
 
