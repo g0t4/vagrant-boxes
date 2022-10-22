@@ -2,7 +2,7 @@
 # virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
 source "virtualbox-iso" "alpine316-x86-virtualbox" {
   boot_command = [
-    "<enter><wait10>",
+    "<enter><wait5>",
     "root<enter><wait>",
     "ifconfig eth0 up && udhcpc -i eth0<enter><wait>",
     "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
