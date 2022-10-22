@@ -2,7 +2,7 @@
 
 sed -i -e \"/rc-service/d\" /sbin/setup-sshd
 
-# inlined: source generic.alpine316.vagrant.cfg
+# BEGIN inlined: source generic.alpine316.vagrant.cfg
 export KEYMAPOPTS="us us"
 export HOSTNAMEOPTS="-n alpine316.localdomain"
 export INTERFACESOPTS="auto lo
@@ -20,7 +20,7 @@ export SSHDOPTS="-c openssh"
 export NTPOPTS="-c none"
 export ERASE_DISKS="/dev/sda"
 export DISKOPTS="-s 0 -m sys /dev/sda"
-# 
+# END inlined
 
 printf \"vagrant\\nvagrant\\ny\\n\" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg \
