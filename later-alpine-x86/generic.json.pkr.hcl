@@ -27,7 +27,8 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   # boot_command script choked on last long command - repetative output (after reboot) showed something about changing the root password - over and over it scrolled insanely quickly - so something on reboot is behaving - or was it? what was sending key strokes after reboot?
   # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\ VM
   #  todo - lovely - vbox 7 has bug - open settings alters NIC 1 (maybe all NICs) to use NAT even if configured Bridged or otherwise... so make sure to set settings for NIC anytime changes made (or don't use vbox gui to change any settings)... 
-  #   TODO => Means when I eject disk with settings I have to fix NIC.. can I eject otherwise? like with command in system?  
+  #   TODO => Means when I eject disk with settings I have to fix NIC.. can I eject otherwise? like with command in system? 
+  #    won't need to worry about this if not manually changing settings which hopefully not have to with packer/vagrant ;)... I do have a working VM VDI so I might use builder to turn that into vagrant box instead of obsessing over packer from ISO when I just want a POC for vagrant box with x86 emulation on arm macs... 
 
   boot_keygroup_interval = "1s"
   boot_wait              = "120s" # slow to start with x86 emulation
