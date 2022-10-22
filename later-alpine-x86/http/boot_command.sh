@@ -3,6 +3,7 @@
 # delete line # rc-service $svc start
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
+# presumably this is configuring env vars that are used by some sort of installation function(s)
 # BEGIN inlined: source generic.alpine316.vagrant.cfg
 export KEYMAPOPTS="us us"
 export HOSTNAMEOPTS="-n alpine316.localdomain"
@@ -39,3 +40,12 @@ chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
 
 reboot
+
+
+#### NOTES
+# - currently uses auto install via setup-alpine
+#   - https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html
+# - could also use semi-auto install
+#   = bypass setup-alpine and call out to multiple setup-X functions 
+#   - https://docs.alpinelinux.org/user-handbook/0.1a/Installing/manual.html
+
