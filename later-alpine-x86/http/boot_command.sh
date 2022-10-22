@@ -1,6 +1,7 @@
 #!ash
 
-sed -i -e \"/rc-service/d\" /sbin/setup-sshd
+# delete line # rc-service $svc start
+sed -i -e "/rc-service/d" /sbin/setup-sshd
 
 # BEGIN inlined: source generic.alpine316.vagrant.cfg
 export KEYMAPOPTS="us us"
@@ -22,7 +23,7 @@ export ERASE_DISKS="/dev/sda"
 export DISKOPTS="-s 0 -m sys /dev/sda"
 # END inlined
 
-printf \"vagrant\\nvagrant\\ny\\n\" \
+printf "vagrant\nvagrant\ny\n" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg \
   && mount /dev/sda2 /mnt \
   && sed -E -i '/#? ?PasswordAuthentication/d' /mnt/etc/ssh/sshd_config \
