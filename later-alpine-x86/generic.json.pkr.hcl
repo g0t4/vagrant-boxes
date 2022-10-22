@@ -5,7 +5,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     "<enter><wait5>",
     "root<enter><wait>",
     # obtain IP via dhcp for eth0:
-    "ifconfig eth0 up && udhcpc -i eth0<enter><wait>",
+    "ifconfig eth0 up && udhcpc -i eth0<enter><wait><wait5>",
     # manual testing w/ host only network:
     #   wget http://192.168.56.1:8000/boot.sh
     #   source boot.sh

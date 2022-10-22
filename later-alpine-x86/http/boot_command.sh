@@ -23,6 +23,8 @@ export NTPOPTS="-c none" # not install openntpd here (see below for alternative 
 export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
 export DISKOPTS="-s 0 -m sys /dev/sda" #
 
+# start alpine's auto install
+# - passing root password = vagrant
 printf "vagrant\nvagrant\ny\n" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg
 
