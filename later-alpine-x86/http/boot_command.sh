@@ -76,6 +76,7 @@ chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
 
 reboot
+eject # confirmed works with virtualbox's emulated CD/DVD drive!
 
 #### NOTES
 # - see /sbin/setup-* functions used above
