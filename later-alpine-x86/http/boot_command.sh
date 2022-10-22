@@ -4,29 +4,12 @@ set -x
 # disable bundled ssh service? # IIUC openssh used instead, setup below
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
-# env vars used by setup-alpine:
-export KEYMAPOPTS="us us"
-export HOSTNAMEOPTS="-n alpine316.localdomain" # set hostname
-export INTERFACESOPTS="auto lo
-iface lo inet loopback
-
-auto eth0
-iface eth0 inet dhcp
-    hostname alpine316.localdomain
-" # enable loopback + dhcp for eth0
-export DNSOPTS="-d local -n 1.1.1.1" # use cloudflare DNS (much faster on my network)
-export TIMEZONEOPTS="-z UTC" # UTC timezone
-export PROXYOPTS="none"
-export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main" # use "-r" for random mirror
-export SSHDOPTS="-c openssh" # install openssh
-export NTPOPTS="-c none" # not install openntpd here (see below for alternative steps used)
-export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
-export DISKOPTS="-s 0 -m sys /dev/sda" #
+source answer_file.cfg
 
 # start alpine's auto install
 # - passing root password = vagrant
 printf "vagrant\nvagrant\ny\n" \
-  | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg
+  | sh /sbin/setup-alpine -f /root/answer_file.cfg
 
 # presumably /dev/sda2 was install target (filesystem)
 # - make following changes before rebooting from /dev/sda
