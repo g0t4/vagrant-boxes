@@ -75,8 +75,8 @@ echo 'PermitRootLogin yes' >>/mnt/etc/ssh/sshd_config
 chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
 
-reboot
 eject # confirmed works with virtualbox's emulated CD/DVD drive!
+reboot
 
 #### NOTES
 # - see /sbin/setup-* functions used above
