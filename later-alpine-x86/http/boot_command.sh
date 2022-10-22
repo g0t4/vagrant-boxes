@@ -1,4 +1,5 @@
 #!ash
+set -x
 
 # disable bundled ssh service? # IIUC openssh used instead, setup below
 sed -i -e "/rc-service/d" /sbin/setup-sshd
@@ -18,26 +19,29 @@ export TIMEZONEOPTS="-z UTC" # UTC timezone
 export PROXYOPTS="none"
 export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main" # use "-r" for random mirror
 export SSHDOPTS="-c openssh" # install openssh
-export NTPOPTS="-c none" # disable NTP # todo NTPOPTS="-c openntpd" # install openntpd
+export NTPOPTS="-c none" # not install openntpd here (see below for alternative steps used)
 export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
 export DISKOPTS="-s 0 -m sys /dev/sda" #
 
 printf "vagrant\nvagrant\ny\n" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg
 
+# presumably /dev/sda2 was install target (filesystem)
+# - make following changes before rebooting from /dev/sda
 mount /dev/sda2 /mnt
 
-# todo escaping?
+# delete existing PermitRootLogin and PasswordAuthentication lines
+# note: alpine's sed isn't same args as macOS's:
 sed -E -i '/#? ?PasswordAuthentication/d' /mnt/etc/ssh/sshd_config
 sed -E -i '/#? ?PermitRootLogin/d' /mnt/etc/ssh/sshd_config
-
+# add exact lines to enable both:
 echo 'PasswordAuthentication yes' >>/mnt/etc/ssh/sshd_config
 echo 'PermitRootLogin yes' >>/mnt/etc/ssh/sshd_config
 
 chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
 
-reboot
+# reboot
 
 #### NOTES
 # - see /sbin/setup-* functions used above
