@@ -75,7 +75,7 @@ echo 'PermitRootLogin yes' >>/mnt/etc/ssh/sshd_config
 chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
 
-# reboot
+reboot
 
 #### NOTES
 # - see /sbin/setup-* functions used above
