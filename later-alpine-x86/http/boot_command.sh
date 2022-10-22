@@ -4,6 +4,26 @@ set -x
 # disable bundled ssh service? # IIUC openssh used instead, setup below
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
+cat > answer_file.cfg <<"EOF"
+  export KEYMAPOPTS="us us"
+  export HOSTNAMEOPTS="-n alpine316.localdomain" # set hostname
+  export INTERFACESOPTS="auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet dhcp
+      hostname alpine316.localdomain
+  " # enable loopback + dhcp for eth0
+  export DNSOPTS="-d local -n 1.1.1.1" # use cloudflare DNS (much faster on my network)
+  export TIMEZONEOPTS="-z UTC" # UTC timezone
+  export PROXYOPTS="none"
+  export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main" # use "-r" for random mirror
+  export SSHDOPTS="-c openssh" # install openssh
+  export NTPOPTS="-c none" # not install openntpd here (see below for alternative steps used)
+  export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
+  export DISKOPTS="-s 0 -m sys /dev/sda"
+EOF
+
 source answer_file.cfg
 
 # start alpine's auto install

@@ -7,11 +7,9 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     # obtain IP via dhcp for eth0:
     "ifconfig eth0 up && udhcpc -i eth0<enter><wait><wait5>",
     # manual testing w/ host only network:
-    #   wget http://192.168.56.1:8000/boot_command.sh
-    #   wget http://192.168.56.1:8000/answer_file.cfg
+    #   wget http://192.168.1.X:8000/boot_command.sh
     #   source boot.sh
     "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/boot_command.sh<enter><wait>",
-    "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/answer_file.cfg<enter><wait>",
     "source boot_command.sh",
     // "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
     // "sed -i -e \"/rc-service/d\" /sbin/setup-sshd<enter><wait>",
