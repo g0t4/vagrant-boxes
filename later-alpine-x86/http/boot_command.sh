@@ -2,8 +2,25 @@
 
 sed -i -e \"/rc-service/d\" /sbin/setup-sshd
 
-# todo inline:
-source generic.alpine316.vagrant.cfg
+# inlined: source generic.alpine316.vagrant.cfg
+export KEYMAPOPTS="us us"
+export HOSTNAMEOPTS="-n alpine316.localdomain"
+export INTERFACESOPTS="auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+    hostname alpine316.localdomain
+"
+export DNSOPTS="-d local -n 4.2.2.1 4.2.2.2 208.67.220.220"
+export TIMEZONEOPTS="-z UTC"
+export PROXYOPTS="none"
+export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main"
+export SSHDOPTS="-c openssh"
+export NTPOPTS="-c none"
+export ERASE_DISKS="/dev/sda"
+export DISKOPTS="-s 0 -m sys /dev/sda"
+# 
 
 printf \"vagrant\\nvagrant\\ny\\n\" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg \
