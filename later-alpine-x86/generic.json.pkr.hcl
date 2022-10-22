@@ -4,17 +4,23 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   boot_command = [
     "<enter><wait5>",
     "root<enter><wait>",
+    # obtain IP via dhcp for eth0:
     "ifconfig eth0 up && udhcpc -i eth0<enter><wait>",
-    "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
-    "sed -i -e \"/rc-service/d\" /sbin/setup-sshd<enter><wait>",
-    "source generic.alpine316.vagrant.cfg<enter><wait>",
-    "printf \"vagrant\\nvagrant\\ny\\n\" | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg && ",
-    "mount /dev/sda2 /mnt && ",
-    "sed -E -i '/#? ?PasswordAuthentication/d' /mnt/etc/ssh/sshd_config && ",
-    "sed -E -i '/#? ?PermitRootLogin/d' /mnt/etc/ssh/sshd_config && ",
-    "echo 'PasswordAuthentication yes' >> /mnt/etc/ssh/sshd_config && ",
-    "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config && ",
-    "chroot /mnt apk add openntpd && chroot /mnt rc-update add openntpd default && reboot<enter>"
+    # manual testing w/ host only network:
+    #   wget http://192.168.56.1:8000/boot.sh
+    #   source boot.sh
+    "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/boot_command.sh<enter><wait>",
+    "source boot_command.sh",
+    // "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
+    // "sed -i -e \"/rc-service/d\" /sbin/setup-sshd<enter><wait>",
+    // "source generic.alpine316.vagrant.cfg<enter><wait>",
+    // "printf \"vagrant\\nvagrant\\ny\\n\" | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg && ",
+    // "mount /dev/sda2 /mnt && ",
+    // "sed -E -i '/#? ?PasswordAuthentication/d' /mnt/etc/ssh/sshd_config && ",
+    // "sed -E -i '/#? ?PermitRootLogin/d' /mnt/etc/ssh/sshd_config && ",
+    // "echo 'PasswordAuthentication yes' >> /mnt/etc/ssh/sshd_config && ",
+    // "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config && ",
+    // "chroot /mnt apk add openntpd && chroot /mnt rc-update add openntpd default && reboot<enter>"
   ]
   # boot_command script choked on last long command - repetative output (after reboot) showed something about changing the root password - over and over it scrolled insanely quickly - so something on reboot is behaving - or was it? what was sending key strokes after reboot?
   # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\ VM
