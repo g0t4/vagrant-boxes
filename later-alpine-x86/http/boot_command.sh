@@ -3,7 +3,7 @@
 # delete line # rc-service $svc start
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
-# presumably this is configuring env vars that are used by some sort of installation function(s)
+# presumably this is configuring env vars that are used by setup-alpine
 # BEGIN inlined: source generic.alpine316.vagrant.cfg
 export KEYMAPOPTS="us us"
 export HOSTNAMEOPTS="-n alpine316.localdomain"
