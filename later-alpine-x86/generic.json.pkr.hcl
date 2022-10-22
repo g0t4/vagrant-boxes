@@ -10,7 +10,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     #   wget http://192.168.1.X:8000/boot_command.sh
     #   source boot.sh
     "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/boot_command.sh<enter><wait>",
-    "source boot_command.sh",
+    "source boot_command.sh<enter>",
     // "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
     // "sed -i -e \"/rc-service/d\" /sbin/setup-sshd<enter><wait>",
     // "source generic.alpine316.vagrant.cfg<enter><wait>",
@@ -22,8 +22,12 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     // "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config && ",
     // "chroot /mnt apk add openntpd && chroot /mnt rc-update add openntpd default && reboot<enter>"
   ]
+  # timing: 6ish minutes to run boot_command (as is 2022-10-22), just < 2 minutes to boot back up after reboot at end of boot_command
+  #  issue: reboot defaults to CD installer... if I eject that and then reboot it starts up with installed alpine... does packer have option to eject drive?
   # boot_command script choked on last long command - repetative output (after reboot) showed something about changing the root password - over and over it scrolled insanely quickly - so something on reboot is behaving - or was it? what was sending key strokes after reboot?
   # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\ VM
+  #  todo - lovely - vbox 7 has bug - open settings alters NIC 1 (maybe all NICs) to use NAT even if configured Bridged or otherwise... so make sure to set settings for NIC anytime changes made (or don't use vbox gui to change any settings)... 
+  #   TODO => Means when I eject disk with settings I have to fix NIC.. can I eject otherwise? like with command in system?  
 
   boot_keygroup_interval = "1s"
   boot_wait              = "120s" # slow to start with x86 emulation
