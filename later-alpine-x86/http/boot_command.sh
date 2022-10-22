@@ -1,6 +1,20 @@
 #!ash
 set -x
 
+# disable ipv6 during installer - todo do I also need to do this for installed conf too? ie edit /mnt/sysctl.* too?
+# todo why isn't sysctl.d/foo.conf working?
+cat >/etc/sysctl.conf  <<EOF
+# Force IPv6 off
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.eth0.disable_ipv6 = 1
+EOF
+sysctl -p # reload conf
+
+
+# now ipv6 is disable, and internets work again!
+
 # disable bundled ssh service? # IIUC openssh used instead, setup below
 sed -i -e "/rc-service/d" /sbin/setup-sshd
 
