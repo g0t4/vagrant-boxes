@@ -20,8 +20,7 @@ export APKREPOSOPTS="https://mirrors.edge.kernel.org/alpine/v3.16/main" # use "-
 export SSHDOPTS="-c openssh" # install openssh
 export NTPOPTS="-c none" # disable NTP # todo NTPOPTS="-c openntpd" # install openntpd
 export ERASE_DISKS="/dev/sda" # prepare disk # used in /sbin/setup-disk
-export DISKOPTS="-s 0 -m sys /dev/sda" # 
-
+export DISKOPTS="-s 0 -m sys /dev/sda" #
 
 printf "vagrant\nvagrant\ny\n" \
   | sh /sbin/setup-alpine -f /root/generic.alpine316.vagrant.cfg
@@ -32,8 +31,8 @@ mount /dev/sda2 /mnt
 sed -E -i '/#? ?PasswordAuthentication/d' /mnt/etc/ssh/sshd_config
 sed -E -i '/#? ?PermitRootLogin/d' /mnt/etc/ssh/sshd_config
 
-echo 'PasswordAuthentication yes' >> /mnt/etc/ssh/sshd_config
-echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config
+echo 'PasswordAuthentication yes' >>/mnt/etc/ssh/sshd_config
+echo 'PermitRootLogin yes' >>/mnt/etc/ssh/sshd_config
 
 chroot /mnt apk add openntpd
 chroot /mnt rc-update add openntpd default
@@ -42,7 +41,7 @@ reboot
 
 #### NOTES
 # - see /sbin/setup-* functions used above
-#   - `grep -A10 -B10 ERASE_DISKS /sbin/setup-*` 
+#   - `grep -A10 -B10 ERASE_DISKS /sbin/setup-*`
 #     - find what uses what
 # - currently uses auto install via setup-alpine
 #   - https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html
