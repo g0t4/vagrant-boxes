@@ -6,6 +6,8 @@ Vagrant.configure(2) do |config|
   config.vm.boot_timeout = 1800
   # TODO keep? # config.vm.synced_folder ".", "/vagrant", disabled: true
 
+  config.ssh.shell = "ash" # alpine linux ash shell default (so far have not added bash or otherwise) - vagrant defaults ssh shell to `bash -l`
+
   config.vm.provider :virtualbox do |v, override|
     v.gui = false
     # modifyvm docs: https://docs.oracle.com/en/virtualization/virtualbox/7.0/user/vboxmanage.html
