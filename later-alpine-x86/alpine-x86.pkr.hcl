@@ -95,7 +95,6 @@ build {
   provisioner "shell" {
     execute_command   = "/bin/sh '{{ .Path }}'"
     expect_disconnect = "true"
-    only              = ["alpine316-x86-virtualbox"]
     scripts = [
       "scripts/network.sh",
       "scripts/apk.sh"
@@ -107,7 +106,6 @@ build {
   provisioner "shell" {
     execute_command   = "{{ .Vars }} /bin/bash '{{ .Path }}'"
     expect_disconnect = "true"
-    only              = ["alpine316-x86-virtualbox"]
     pause_before      = "2m0s"
     scripts = [
       "scripts/hostname.sh",
