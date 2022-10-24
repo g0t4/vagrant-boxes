@@ -53,3 +53,7 @@ retry apk add haveged
 
 # Autostart the haveged daemon.
 rc-update add haveged default && rc-service haveged start
+
+# NOTES:
+#  https://wiki.alpinelinux.org/wiki/VirtualBox_guest_additions
+# NOTE: need edge repositories (see above to add) to install v7 guest additions, or specify when instaling... (see above)
