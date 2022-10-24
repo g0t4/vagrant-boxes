@@ -1,0 +1,6 @@
+{
+  "author": "Wes Higbee",
+  "website": "https://github.com/g0t4/vagrant-boxes",
+  "repository": "https://github.com/g0t4/vagrant-boxes",
+  "description": "Alpine 3.16.2 x86 - compat with virtualbox x86 emulator on Apple Silicon"
+}
