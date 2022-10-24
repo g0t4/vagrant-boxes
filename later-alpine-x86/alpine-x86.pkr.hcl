@@ -125,5 +125,6 @@ build {
     include              = ["info.json"]
     compression_level    = 9
     vagrantfile_template = "template-vagrantfile.rb"
+    keep_input_artifact  = true
   }
 }
