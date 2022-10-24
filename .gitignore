@@ -3,6 +3,9 @@
 *.pvm
 *.pmvp
 *.ov[af]
+*.vdi
+*.vhd
+*.vmdk
 
 # Created by https://www.toptal.com/developers/gitignore/api/vagrant
 # Edit at https://www.toptal.com/developers/gitignore?templates=vagrant
