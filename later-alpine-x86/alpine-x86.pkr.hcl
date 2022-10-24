@@ -11,8 +11,10 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
     #   source boot.sh
     # packer's http server (over nat'd nic) isn't working with vbox's Apple Silicon Dev Preview 7.0.0 - so just pull from github - not idea but ok enough to test
     "wget https://raw.githubusercontent.com/g0t4/vagrant-boxes/master/later-alpine-x86/http/boot_command.sh",
+    "<enter>",
     # "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/boot_command.sh<enter><wait>",
-    "source boot_command.sh<enter>",
+    "source boot_command.sh",
+    "<enter>",
     // "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/generic.alpine316.vagrant.cfg<enter><wait>",
     // "sed -i -e \"/rc-service/d\" /sbin/setup-sshd<enter><wait>",
     // "source generic.alpine316.vagrant.cfg<enter><wait>",
