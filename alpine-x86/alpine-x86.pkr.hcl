@@ -103,9 +103,9 @@ build {
     expect_disconnect = "true"
     scripts = [
       "scripts/network.sh",
-      "scripts/apk.sh"
+      "scripts/apk_then_reboot.sh"
     ]
-    pause_after         = "${var.pause_after_reboot}" # apk.sh triggers reboot
+    pause_after         = "${var.pause_after_reboot}"
     start_retry_timeout = "15m"
     timeout             = "2h0m0s"
   }
