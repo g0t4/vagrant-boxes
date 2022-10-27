@@ -1,7 +1,7 @@
-# # slow to start with x86 emulation
-variable "boot_wait" {
-  type    = string
-  default = "120s"
+# defaults are for emulated x86
+variables {
+  boot_wait = "120s"
+  pause_after_reboot = "120s"
 }
 
 # virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
@@ -105,6 +105,7 @@ build {
       "scripts/network.sh",
       "scripts/apk.sh"
     ]
+    pause_after = "${var.pause_after_reboot}" # apk.sh triggers reboot
     start_retry_timeout = "15m"
     timeout             = "2h0m0s"
   }
@@ -112,7 +113,6 @@ build {
   provisioner "shell" {
     execute_command   = "{{ .Vars }} /bin/bash '{{ .Path }}'"
     expect_disconnect = "true"
-    pause_before      = "2m0s"
     scripts = [
       "scripts/hostname.sh",
       "scripts/lsb.sh",
