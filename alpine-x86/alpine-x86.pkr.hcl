@@ -1,6 +1,6 @@
 # defaults are for emulated x86
 variables {
-  boot_wait = "120s"
+  boot_wait          = "120s"
   pause_after_reboot = "120s"
 }
 
@@ -105,7 +105,7 @@ build {
       "scripts/network.sh",
       "scripts/apk.sh"
     ]
-    pause_after = "${var.pause_after_reboot}" # apk.sh triggers reboot
+    pause_after         = "${var.pause_after_reboot}" # apk.sh triggers reboot
     start_retry_timeout = "15m"
     timeout             = "2h0m0s"
   }
