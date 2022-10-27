@@ -53,7 +53,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   iso_checksum           = "file:https://mirrors.edge.kernel.org/alpine/v3.16/releases/x86/alpine-virt-3.16.2-x86.iso.sha256"
   iso_url                = "https://mirrors.edge.kernel.org/alpine/v3.16/releases/x86/alpine-virt-3.16.2-x86.iso"
   memory                 = 2048 # 2 GB
-  output_directory       = "output/alpine316-x86-virtualbox"
+  output_directory       = "out/alpine316-x86-virtualbox"
   shutdown_command       = "/sbin/poweroff"
   ssh_password           = "vagrant"
   ssh_port               = 22
