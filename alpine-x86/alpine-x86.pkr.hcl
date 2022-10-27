@@ -1,8 +1,6 @@
 # defaults are for emulated x86
-variables {
-  boot_wait          = "120s"
-  pause_after_reboot = "120s"
-}
+variable "boot_wait" { type = string }
+variable "pause_after_reboot" { type = string }
 
 # virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
 source "virtualbox-iso" "alpine316-x86-virtualbox" {
