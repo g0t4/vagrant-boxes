@@ -1,0 +1,7 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "test-alpine-x86"
+  config.vm.box_url = "file://../out/packer_alpine316-x86-virtualbox_virtualbox.box"
+end
