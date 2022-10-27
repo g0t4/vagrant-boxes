@@ -2,6 +2,13 @@
 variable "boot_wait" { type = string }
 variable "pause_after_reboot" { type = string }
 
+# todo map type?
+variables {
+  box_tag                 = "wesdemos/alpine316-x86"
+  box_version             = "1.0.5"
+  box_version_description = "this build was performed native on Intel Mac"
+}
+
 # virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
 source "virtualbox-iso" "alpine316-x86-virtualbox" {
   boot_command = [
@@ -124,11 +131,18 @@ build {
     timeout             = "2h0m0s"
   }
 
-  post-processor "vagrant" {
-    output               = "out/packer_{{.BuildName}}_{{.Provider}}.box"
-    include              = ["info.json"]
-    compression_level    = 9
-    vagrantfile_template = "template-vagrantfile.rb"
-    keep_input_artifact  = false
+  post-processors {
+    post-processor "vagrant" {
+      output               = "out/packer_{{.BuildName}}_{{.Provider}}.box"
+      include              = ["info.json"]
+      compression_level    = 9
+      vagrantfile_template = "template-vagrantfile.rb"
+      keep_input_artifact  = false
+    }
+    post-processor "vagrant-cloud" {
+      box_tag             = "${var.box_tag}"
+      version             = "${var.box_version}"
+      version_description = "${var.box_version_description}"
+    }
   }
 }
