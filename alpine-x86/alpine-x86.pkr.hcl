@@ -1,4 +1,8 @@
-variable "boot_wait" { type = string, default = "120s" } # # slow to start with x86 emulation
+# # slow to start with x86 emulation
+variable "boot_wait" {
+  type    = string
+  default = "120s"
+}
 
 # virtualbox-iso builder # https://developer.hashicorp.com/packer/plugins/builders/virtualbox/iso
 source "virtualbox-iso" "alpine316-x86-virtualbox" {
@@ -37,7 +41,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   #    won't need to worry about this if not manually changing settings which hopefully not have to with packer/vagrant ;)... I do have a working VM VDI so I might use builder to turn that into vagrant box instead of obsessing over packer from ISO when I just want a POC for vagrant box with x86 emulation on arm macs... 
 
   boot_keygroup_interval = "1s"
-  boot_wait              = "${var.autoinstall_wait}" 
+  boot_wait              = "${var.boot_wait}"
   cpus                   = 2
   disk_size              = 131072 # 128 MB
   guest_additions_mode   = "upload"
