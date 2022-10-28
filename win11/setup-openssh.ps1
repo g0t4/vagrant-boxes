@@ -36,7 +36,16 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" `
 # todo other config? 
 #   ssh server config: 
 #       https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
-#   client/account config:
+
+# ssh config nonsense:
+#  last two lines set authorized_keys file to a different location for administrators!! 
+#    FML NO .. these two:
+#      Match Group administrators
+#        AuthorizedKeysFile __PROGRAMDATA__/ssh/
+# original config defaults: C:\Windows\System32\OpenSSH\sshd_config_default
+#   TODO NUKE THESE - edit by hand: 
+explorer.exe C:\ProgramData\ssh\sshd_config
+restart-service sshd
 
 ##### add vagrant insecure key to authorized_keys
 # ensure .ssh dir exists
@@ -45,7 +54,10 @@ if(!(get-item C:\Users\vagrant\.ssh -ErrorAction SilentlyContinue)) {
 }
 iwr -OutFile authorized_keys `
     https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
-mv authorized_keys C:\Users\vagrant\.ssh
+mv -force authorized_keys C:\Users\vagrant\.ssh
+# can test with key:
+#  iwr -OutFile key https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant
+#  ssh -i key localhost
 
 # NOTE: test with:
 #  ssh localhost
