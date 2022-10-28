@@ -2,6 +2,7 @@ REM from https://developer.hashicorp.com/vagrant/docs/boxes/base
 
 REM disable UAC
 reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /d 0 /t REG_DWORD /f /reg:64
+REM TODO - reboot after disable UAC
 
 REM MUST HAVE PRVIATE NETWORK TYPE BEFORE winrm config:
 

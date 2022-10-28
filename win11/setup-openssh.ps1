@@ -37,8 +37,16 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" `
 #   ssh server config: 
 #       https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
 #   client/account config:
-#       add vagrant insecure key to vagrant user, others?
-#       
+
+##### add vagrant insecure key to authorized_keys
+# ensure .ssh dir exists
+if(!(get-item C:\Users\vagrant\.ssh -ErrorAction SilentlyContinue)) {
+    new-item C:\Users\vagrant\.ssh
+}
+iwr -OutFile authorized_keys `
+    https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
+mv authorized_keys C:\Users\vagrant\.ssh
+
 # NOTE: test with:
 #  ssh localhost
 #    accept key
