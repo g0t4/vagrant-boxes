@@ -7,7 +7,6 @@ packer {
   }
 }
 
-
 variable "iso_url" { type = string }
 variable "iso_checksum" { type = string }
 

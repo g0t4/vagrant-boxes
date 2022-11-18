@@ -7,10 +7,14 @@ packer {
   }
 }
 
+
+variable "iso_url" { type = string }
+variable "iso_checksum" { type = string }
+
 source "parallels-iso" "centos9s-arm" {
 
-  iso_url      = "http://atl.mirrors.knownhost.com/centos/9-stream/BaseOS/aarch64/iso/CentOS-Stream-9-latest-aarch64-dvd1.iso"
-  iso_checksum = "file:https://atl.mirrors.knownhost.com/centos/9-stream/BaseOS/aarch64/iso/CentOS-Stream-9-latest-aarch64-dvd1.iso.SHA256SUM"
+  iso_url      = var.iso_url
+  iso_checksum = var.iso_checksum
 
   # use root for provisioning only (last provision script disables root login)
   ssh_username = "root"
