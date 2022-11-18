@@ -11,6 +11,13 @@ packer {
 variable "iso_url" { type = string }
 variable "iso_checksum" { type = string }
 
+variable "box_org" { type = string }
+variable "box_name" { type = string }
+local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
+
+variable "box_version" { type = string }
+variable "box_version_desc" { type = string }
+
 source "parallels-iso" "centos9s-arm" {
 
   iso_url      = var.iso_url
@@ -54,11 +61,13 @@ source "parallels-iso" "centos9s-arm" {
     ["set", "{{.Name}}", "--3d-accelerate", "off"],
   ]
 
+  vm_name          = "build-${var.box_name}"
+  output_directory = "build-${var.box_name}"
 }
 
 build {
   sources = ["source.parallels-iso.centos9s-arm"]
-  name    = "centos9s-arm"
+  name    = "${var.box_name}"
 
   # note: provisioners run as root user (don't need sudo), see source's ("builder's") ssh communicator args
   provisioner "shell" {
@@ -72,10 +81,18 @@ build {
     ]
   }
 
-  post-processor "vagrant" {
-    output = "out/packer_{{.BuildName}}_{{.Provider}}.box" # the default
-    # box files: https://developer.hashicorp.com/vagrant/docs/boxes/format
-    include           = ["info.json"]
-    compression_level = 9 # default = 6
+  post-processors {
+    post-processor "vagrant" {
+      output = "out/packer_${var.box_name}_{{.Provider}}.box"
+      # box files: https://developer.hashicorp.com/vagrant/docs/boxes/format
+      include           = ["info.json"]
+      compression_level = 9 # default = 6
+    }
+
+    post-processor "vagrant-cloud" {
+      box_tag = "${local.box_tag}"
+      version = "${var.box_version}"
+      version_description = "${var.box_version_desc}"
+    }
   }
 }
