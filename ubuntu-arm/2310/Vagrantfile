@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "test-ubuntu2210-arm"
-  config.vm.box_url = "file://../out/packer_ubuntu2210-arm_parallels.box"
+  config.vm.box = "test-ubuntu2310-arm"
+  config.vm.box_url = "file://../out/packer_ubuntu2310-arm_parallels.box"
 
 end
