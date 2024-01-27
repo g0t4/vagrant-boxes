@@ -3,6 +3,10 @@ packer {
     parallels = {
       version = ">=1.0.3"
       source  = "github.com/hashicorp/parallels"
+    },
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = "~> 1"
     }
   }
 }
