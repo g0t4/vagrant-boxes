@@ -39,6 +39,8 @@ source "parallels-iso" "ubuntu-arm" {
   parallels_tools_flavor = "lin-arm"
   shutdown_command       = "echo 'password' | sudo -S shutdown -P now"
   guest_os_type          = "ubuntu"
+  host_interfaces        = ["en16"]
+  # default list of host_interfaces checked stops at en9: https://github.com/Parallels/packer-plugin-parallels/blob/master/builder/parallels/iso/builder.go#L147-L151
 
   cpus   = 4
   memory = 4096
