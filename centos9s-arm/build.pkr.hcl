@@ -90,8 +90,8 @@ build {
     }
 
     post-processor "vagrant-cloud" {
-      box_tag = "${local.box_tag}"
-      version = "${var.box_version}"
+      box_tag             = "${local.box_tag}"
+      version             = "${var.box_version}"
       version_description = "${var.box_version_desc}"
     }
   }
