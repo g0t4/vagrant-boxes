@@ -1,3 +1,6 @@
+#!/usr/bin/env fish
+
+vagrant_cloud_token
 
 # validate both builds
 packer validate -var-file="emulated/pkrvars.hcl" .
