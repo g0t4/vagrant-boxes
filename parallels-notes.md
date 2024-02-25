@@ -5,8 +5,15 @@
 - downloads:
   - Parallels Desktop for Mac Installation Images:
     - https://my.parallels.com/desktop/pdfm/downloads
+      - Also: https://www.parallels.com/products/desktop/download/
   - Toolbox:
     - https://my.parallels.com/toolbox/downloads
+- toolbox:
+  - `brew uninstall parallels-toolbox` (had 5.5.1)
+    - `brew install parallels-toolbox` (got 6.6.1!)
+    - `brew cat parallels-toolbox` => says `auto_updates` but my install was old! maybe my install was messed up ... ie maybe I ran Clean My Mac on it?
+    - docs (pdf):
+      - https://download.parallels.com/toolbox/v1/docs/en_US/Parallels%20Toolbox%20User%E2%80%99s%20Guide.pdf
 - SDK:
   - download:
     - https://survey.parallels.com/s3/Parallels-SDK-download
