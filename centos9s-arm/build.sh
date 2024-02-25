@@ -1,3 +1,7 @@
+#!/usr/bin/env fish
+
+vagrant_cloud_token
+
 echo 'FYI if get FAILURE finding "Host IP...", workaround: change host nic (bound to network) to en0 to en9, check w/ ifconfig... anything over en10 wont work with current parallels+packer plugin'
 
 echo "trashing previous *.box builds... can recover from trash if a mistake"
