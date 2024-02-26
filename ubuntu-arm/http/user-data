@@ -16,7 +16,7 @@ autoinstall:
     install: false
   identity: # https://ubuntu.com/server/docs/install/autoinstall-reference#identity
     hostname: server
-    password: $6$wUGzVGQA6IvmTBhd$n0YEQ5kOZPWtb3NKfVdzwAJG7.RvWd2e/PurWWKCrYADRSC7E3VpzcKgzKBmksEhFWRAZIVOZ7F/l2WDPBM6T.
+    password: $1$3wq9v2pb$kBmHw8BFCIBvqSYgOt5Hi1
     username: vagrant
   kernel:
     package: linux-generic

@@ -12,8 +12,6 @@ sudo systemctl --quiet is-active systemd-random-seed.service
 sudo systemctl stop systemd-random-seed.service
 [ -f /var/lib/systemd/random-seed ] && sudo rm --force /var/lib/systemd/random-seed
 
-# TODO disable vagrant:password external access like centos9s-arm
-
 # Notes w.r.t. bento/robox differences:
 #   install logs may be useful if anyone has trouble (i.e. parallel tools)
 #   /var/cache/apt ~90MB => leave apt packages, presumably the box was built recently and so this saves time to pull all packages each time an instance is created

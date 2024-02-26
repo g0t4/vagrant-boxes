@@ -32,7 +32,7 @@ source "parallels-iso" "debian-arm" {
   # packer's ssh communicator config => packer (builders, provisioners, etc) connect as:
   # https://www.packer.io/docs/communicators/ssh
   ssh_username           = "vagrant"
-  ssh_password           = "password"
+  ssh_password           = "vagrant"
   ssh_timeout            = "20m"
   ssh_handshake_attempts = 20
 
@@ -68,7 +68,7 @@ build {
   name    = "${var.box_name}"
 
   provisioner "shell" {
-    execute_command = "echo 'password' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+    execute_command = "echo 'vagrant' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
     script          = "scripts/sudoers.sh"
   }
 
