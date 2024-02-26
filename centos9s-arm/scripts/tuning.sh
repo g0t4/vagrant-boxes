@@ -29,6 +29,7 @@ retry() {
   return "${RESULT}"
 }
 
+# TODO keep tuned? or not? look into impact on perf at some point?
 # Configure tuned
 retry dnf --assumeyes install tuned
 systemctl enable tuned
