@@ -20,3 +20,7 @@ NEXT UP need to add/review scripts and that should be about it!!
 - systemd_debian.sh REVIEW
 - update_debian.sh REVIEW
 - ALSO review any extra scripts I already have from ubuntu2310 copy pasta
+
+### PRN robox script review
+
+- https://github.com/lavabit/robox/blob/master/scripts/debian12/apt.sh
