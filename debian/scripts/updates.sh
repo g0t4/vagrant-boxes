@@ -4,9 +4,6 @@
 # bento: https://github.com/chef/bento/blob/master/packer_templates/scripts/debian/update_debian.sh
 # robox: https://github.com/lavabit/robox/blob/master/scripts/debian12/apt.sh
 
-export
-export DEBCONF_NONINTERACTIVE_SEEN=true
-
 # avoid deadlock during install:
 sudo systemctl stop \
   apt-daily.timer \
