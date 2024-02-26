@@ -1,3 +1,5 @@
+#!/bin/sh -eux
+
 # hostname
 sudo hostnamectl set-hostname debian12
 sudo sed -i "s/127.0.1.1\s.*/127.0.1.1\tdebian12/g" /etc/hosts
