@@ -27,6 +27,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get autoclean -y
 
+# include already installed packages (don't bother checking), esp b/c I share this list with multiple distros
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   apt-file \
   command-not-found \
