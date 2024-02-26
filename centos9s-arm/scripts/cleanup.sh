@@ -3,11 +3,14 @@
 # sync with debian/scripts/cleanup.sh
 
 # from https://github.com/lavabit/robox/blob/eadba7cd7a3aa58e6f6f2f3e92fc51585ab2828b/scripts/centos9s/cleanup.sh#L5-L9
-echo "Remove the ethernet identity values.\n"
-if [ -f /etc/sysconfig/network-scripts/ifcfg-eth0 ]; then
-  sed -i /UUID/d /etc/sysconfig/network-scripts/ifcfg-eth0
-  sed -i /HWADDR/d /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
+# TODO - NetworkManager stores new network profiles in keyfile format in the /etc/NetworkManager/system-connections/ directory.
+#   cat /etc/sysconfig/network-scripts/readme-ifcfg-rh.txt
+#
+# echo "Remove the ethernet identity values.\n"
+# if [ -f /etc/sysconfig/network-scripts/ifcfg-eth0 ]; then
+#   sed -i /UUID/d /etc/sysconfig/network-scripts/ifcfg-eth0
+#   sed -i /HWADDR/d /etc/sysconfig/network-scripts/ifcfg-eth0
+# fi
 
 # *** from https://github.com/chef/bento/blob/45792040a997156a257660bd3e2d8f6b1209b677/packer_templates/scripts/debian/cleanup_debian.sh#L50-L56
 echo "blank netplan machine-id (DUID) so machines get unique ID generated on boot"
