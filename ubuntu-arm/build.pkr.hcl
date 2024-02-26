@@ -81,8 +81,8 @@ build {
     scripts = [
       "scripts/parallels.tools.sh",
       "scripts/apt.sh",
-      "scripts/cleanup.sh",
       "scripts/networking.sh",
+      "scripts/cleanup.sh",
     ]
   }
 

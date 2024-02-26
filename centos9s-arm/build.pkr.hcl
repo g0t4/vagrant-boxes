@@ -75,8 +75,9 @@ build {
     scripts = [
       "scripts/parallels.tools.sh",
       "scripts/apt.sh",
-      "scripts/vagrant-ssh.sh",
       "scripts/tuning.sh",
+      "scripts/networking.sh",
+      "scripts/vagrant-ssh.sh",
       "scripts/cleanup.sh",
     ]
   }
