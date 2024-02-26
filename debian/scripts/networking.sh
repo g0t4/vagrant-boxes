@@ -1,10 +1,6 @@
-# PRN disable ipv6 if have build issues, i.e. vagrant tty bug can be related to ipv6... but lets not do this if its not an issue for me
-#   PRN run before apt update? maybe => FYI maybe just combine all these setup scripts so it is obvious the order
-# https://github.com/lavabit/robox/blob/eadba7cd7a3aa58e6f6f2f3e92fc51585ab2828b/scripts/debian12/network.sh#L34-L40
-
-
-# set hostname?
-# https://github.com/lavabit/robox/blob/eadba7cd7a3aa58e6f6f2f3e92fc51585ab2828b/scripts/debian12/network.sh#L43-L45
+# hostname
+sudo hostnamectl set-hostname debian12
+sudo sed -i "s/127.0.1.1\s.*/127.0.1.1\tdebian12/g" /etc/hosts
 
 # PRN add delay? both bento and robox have this:
 # printf "pre-up sleep 2\n" >> /etc/network/interfaces

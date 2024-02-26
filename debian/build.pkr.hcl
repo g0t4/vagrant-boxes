@@ -75,11 +75,12 @@ build {
 
   # note: provisioners run as vagrant user (thus need sudo or similiar), see source's ("builder's") ssh communicator args
   provisioner "shell" {
+    
     scripts = [
       "scripts/install.parallels.tools.sh",
       "scripts/updates.sh",
       "scripts/cleanup.sh",
-      # PRN networking
+      "scripts/networking.sh",
       # PRN systemd_ssh_shutdown.sh
     ]
   }
