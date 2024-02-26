@@ -80,12 +80,9 @@ build {
       "scripts/updates.sh",
       "scripts/cleanup.sh",
       "scripts/networking.sh",
+      "scripts/vagrant-ssh.sh",
       # PRN systemd_ssh_shutdown.sh
     ]
-  }
-
-  provisioner "shell" {
-    scripts = ["scripts/vagrant-ssh.sh"]
   }
 
   post-processors {
