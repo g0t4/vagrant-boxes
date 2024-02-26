@@ -38,7 +38,7 @@ source "parallels-iso" "ubuntu-arm" {
 
   parallels_tools_flavor = "lin-arm"
   shutdown_command       = "echo 'password' | sudo -S shutdown -P now"
-  guest_os_type          = "ubuntu"
+  guest_os_type          = "debian"
   host_interfaces        = ["en0", "en1", "en2", "en3", "en4", "en5", "en6", "en7", "en8", "en9", "en10", "en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18", "en19", "en20", "ppp0", "ppp1", "ppp2"]
   # default list of host_interfaces checked stops at en9: https://github.com/Parallels/packer-plugin-parallels/blob/master/builder/parallels/iso/builder.go#L147-L151
 
@@ -47,20 +47,7 @@ source "parallels-iso" "ubuntu-arm" {
 
   http_directory = "http" # serve autoinstall files
   boot_command = [
-    # ubuntu22.04 uses GRUB v2 boot loader
-    # open grub's "BASH-like" (c)ommand line:
-    "<esc><esc>c",
-    # commands: https://www.gnu.org/software/grub/manual/grub/html_node/Command_002dline-and-menu-entry-commands.html
-
-    # load kernel w/ autoinstall files for unattended install
-    # - `autoinstall` kernel CLI arg required, else prompt to format disk
-    "linux /casper/vmlinuz \"ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/\" --- autoinstall",
-    "<enter>",
-    "initrd /casper/initrd",
-    "<enter>",
-    "boot",
-    "<enter><wait>",
-    "${var.autoinstall_wait}",
+    "<wait><up>e<wait><down><down><down><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><wait>install <wait> preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian/preseed.cfg <wait>debian-installer=en_US.UTF-8 <wait>auto <wait>locale=en_US.UTF-8 <wait>kbd-chooser/method=us <wait>keyboard-configuration/xkb-keymap=us <wait>netcfg/get_hostname={{ .Name }} <wait>netcfg/get_domain=vagrantup.com <wait>fb=false <wait>debconf/frontend=noninteractive <wait>console-setup/ask_detect=false <wait>console-keymaps-at/keymap=us <wait>grub-installer/bootdev=/dev/sda <wait><f10><wait>"
   ]
 
   vm_name          = "build-${var.box_name}"
