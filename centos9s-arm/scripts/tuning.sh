@@ -43,3 +43,5 @@ sed -i -e 's/^GRUB_TIMEOUT=[0-9]\+$/GRUB_TIMEOUT=1/' /etc/default/grub
 [ -f /etc/grub2-efi.cfg  ] && grub2-mkconfig -o /etc/grub2-efi.cfg 
 # For BIOS systems.
 [ -f /etc/grub2.cfg ] && grub2-mkconfig -o /etc/grub2.cfg
+
+# TODO do I need to modify grub timeout? ubuntu-2310 box doesn't pause on boot (not w/ vagrant up which is really all I care about)
