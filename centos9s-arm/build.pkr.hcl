@@ -74,7 +74,7 @@ build {
     timeout = "10m"
     scripts = [
       "scripts/install.parallels.tools.sh",
-      "scripts/updates.sh",
+      "scripts/apt.sh",
       "scripts/vagrant.sh",
       "scripts/tuning.sh",
       "scripts/cleanup.sh",
