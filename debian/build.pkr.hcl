@@ -79,6 +79,8 @@ build {
       "scripts/install.parallels.tools.sh",
       "scripts/updates.sh",
       "scripts/cleanup.sh",
+      # PRN networking
+      # PRN systemd_ssh_shutdown.sh
     ]
   }
 
