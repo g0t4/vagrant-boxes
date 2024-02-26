@@ -30,16 +30,16 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get autoclean -y
 # include already installed packages (don't bother checking), esp b/c I share this list with multiple distros
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   apt-file \
+  bash-completion \
   command-not-found \
+  curl wget \
   fish \
   grc \
+  iproute2 \
   lsof \
+  procps \
   psmisc \
   silversearcher-ag \
   tree \
   util-linux \
-  vim \
-  bash-completion \
-  iproute2 \
-  procps \
-  curl wget
+  vim
