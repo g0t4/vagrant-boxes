@@ -24,7 +24,7 @@ local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
 variable "box_version" { type = string }
 variable "box_version_desc" { type = string }
 
-source "parallels-iso" "ubuntu-arm" {
+source "parallels-iso" "debian-arm" {
 
   iso_url      = var.iso_url
   iso_checksum = var.iso_checksum
@@ -34,7 +34,7 @@ source "parallels-iso" "ubuntu-arm" {
   ssh_username           = "vagrant"
   ssh_password           = "password"
   ssh_timeout            = "20m"
-  ssh_handshake_attempts = 20 # see notes on troubleshooting for details about SSH quirks with ubuntu's autoinstall SSH server
+  ssh_handshake_attempts = 20
 
   parallels_tools_flavor = "lin-arm"
   shutdown_command       = "echo 'password' | sudo -S shutdown -P now"
@@ -55,7 +55,7 @@ source "parallels-iso" "ubuntu-arm" {
 }
 
 build {
-  sources = ["source.parallels-iso.ubuntu-arm"]
+  sources = ["source.parallels-iso.debian-arm"]
   name    = "${var.box_name}"
 
   provisioner "shell" {
