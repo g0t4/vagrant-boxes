@@ -37,7 +37,7 @@ source "parallels-iso" "debian-arm" {
   ssh_handshake_attempts = 20
 
   parallels_tools_flavor = "lin-arm"
-  shutdown_command       = "echo 'password' | sudo -S shutdown -P now"
+  shutdown_command = "systemctl poweroff" # no shutdown command avail, TODO what does packer do by default if I don't specify this?
   guest_os_type          = "debian"
   host_interfaces        = ["en0", "en1", "en2", "en3", "en4", "en5", "en6", "en7", "en8", "en9", "en10", "en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18", "en19", "en20", "ppp0", "ppp1", "ppp2"]
   # default list of host_interfaces checked stops at en9: https://github.com/Parallels/packer-plugin-parallels/blob/master/builder/parallels/iso/builder.go#L147-L151
