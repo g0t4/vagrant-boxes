@@ -1,41 +1,35 @@
 #!/bin/sh -eux
 
-dnf --assumeyes update
+sudo dnf --assumeyes update
+
+sudo dnf --assumeyes install epel-release
+# bat found in epel via https://koji.fedoraproject.org/koji/packageinfo?packageID=27506
 
 # packages to install (include already installed, not worth it to double check each release)
-dnf --assumeyes install \
+sudo dnf --assumeyes install \
   bash-completion \
-  mlocate \
-  rsync \
-  vim-enhanced \
+  bat \
   bind-utils \
-  wget \
-  dos2unix unix2dos \
-  lsof \
-  telnet \
-  net-tools \
-  patch \
-  sysstat \
-  make \
-  cmake \
-  autoconf \
-  automake \
-  libtool \
-  ncurses-devel \
-  glibc-headers
-
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  apt-file \
-  bash-completion \
-  command-not-found \
   curl wget \
+  dos2unix \
   fish \
-  grc \
-  iproute2 \
+  iproute \
   lsof \
   procps \
   psmisc \
-  silversearcher-ag \
+  rsync \
+  sysstat \
+  telnet \
+  the_silver_searcher \
   tree \
   util-linux \
-  vim
+  util-linux-user \
+  vim-enhanced
+
+  # not avail:
+  #   grc => config in downstream VM is fine
+  # no:
+  #   PackageKit-command-not-found \
+  #     confusion when command hangs and I am less of a fan of being prompted (default) to install it... I'd rather be told about a package and that is it... but, I can add this downstream in Vagrantfile shell provisioners if I want it
+  #     also `dnf whatprovides foo` exists
+  #   pipx \
