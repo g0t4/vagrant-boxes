@@ -8,7 +8,6 @@ autoinstall_wait = "<wait4m>"
 
 box_org  = "wesdemos"
 box_name = "ubuntu2310-arm"
-# TODO make sure vagrant tags arch with new arch support for vagrant boxes
 
 box_version      = "1.1.1"
 box_version_desc = "update for 23.10.1"
