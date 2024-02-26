@@ -13,7 +13,7 @@ sudo systemctl stop \
   apt-daily-upgrade.timer \
   apt-daily.service \
   apt-daily-upgrade.service
-# TODO do I really wanna disable apt timers/services for VMs booted from this box?
+
 # disable apt timers/services so they don't run on VMs booted from this box too:
 sudo systemctl disable \
   apt-daily.timer \
@@ -26,8 +26,6 @@ sudo systemctl mask \
   apt-daily-upgrade.timer \
   apt-daily.timer
 sudo systemctl daemon-reload
-# FYI don't modify default cleanup config, that way if someone wants to enable it, it's still there:
-#  /etc/apt/apt.conf.d/10periodic
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
