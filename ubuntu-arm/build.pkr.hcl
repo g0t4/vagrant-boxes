@@ -80,7 +80,7 @@ build {
   provisioner "shell" {
     scripts = [
       "scripts/install.parallels.tools.sh",
-      "scripts/updates.sh",
+      "scripts/apt.sh",
       "scripts/cleanup.sh",
     ]
   }

@@ -77,7 +77,7 @@ build {
 
     scripts = [
       "scripts/install.parallels.tools.sh",
-      "scripts/updates.sh",
+      "scripts/apt.sh",
       "scripts/cleanup.sh",
       "scripts/networking.sh",
       "scripts/vagrant-ssh.sh",
