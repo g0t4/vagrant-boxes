@@ -84,6 +84,10 @@ build {
     ]
   }
 
+  provisioner "shell" {
+    scripts = ["scripts/vagrant-ssh.sh"]
+  }
+
   post-processors {
     # note this is a chain of post-processors, NOT separte post-processors
 
