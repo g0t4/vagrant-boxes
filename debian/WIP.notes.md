@@ -9,14 +9,13 @@ NEXT UP need to add/review scripts and that should be about it!!
 
 ### bento script review
 
-- networking_debian.sh
-  - not adding unless an issue arises
-    - don't disable predictable network interface naming
-      - esp b/c I expect VMs to have multiple nics so eth0 alone isn't gonna cut it
-    - add 2 seconds for /etc/network/interfaces? for dhcp?
-- PRN bento script review:
-  - network.sh
-  - parallels.sh (s/b same)
+
+- network.sh
+  - PRN disable ipv6 if have build issues, i.e. vagrant tty bug can be related to ipv6... but lets not do this if its not an issue for me
+    - https://github.com/lavabit/robox/blob/eadba7cd7a3aa58e6f6f2f3e92fc51585ab2828b/scripts/debian12/network.sh#L34-L40
+  - set hostname?
+    - https://github.com/lavabit/robox/blob/eadba7cd7a3aa58e6f6f2f3e92fc51585ab2828b/scripts/debian12/network.sh#L43-L45
+  - 
 
 ### PRN robox script review
 
