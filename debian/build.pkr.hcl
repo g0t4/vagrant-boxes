@@ -37,7 +37,7 @@ source "parallels-iso" "debian-arm" {
   ssh_handshake_attempts = 20
 
   parallels_tools_flavor = "lin-arm"
-  shutdown_command       = "systemctl poweroff" # /sbin/halt and /sbin/shutdown exist, I got `systemctl poweoff` to work manually in abandoned packer build... so lets stick with that, FYI I didn't need sudo to run systemctl poweroff... lets see if that is the case in the packer build
+  shutdown_command       = "sudo /sbin/shutdown -h now" # -P if fails on next build
   guest_os_type          = "debian"
   host_interfaces        = ["en0", "en1", "en2", "en3", "en4", "en5", "en6", "en7", "en8", "en9", "en10", "en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18", "en19", "en20", "ppp0", "ppp1", "ppp2"]
   # default list of host_interfaces checked stops at en9: https://github.com/Parallels/packer-plugin-parallels/blob/master/builder/parallels/iso/builder.go#L147-L151
