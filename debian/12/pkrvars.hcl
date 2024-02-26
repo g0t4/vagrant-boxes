@@ -1,7 +1,20 @@
-# NOTE 23.10 is still latest for server iso, only desktop has patch .1 release
-# FYI need to update version in both spots for new release (releases/version and ubuntu-version), right now they are different b/c 23.10.1 is only for desktop:
-iso_url      = "https://cdimage.ubuntu.com/releases/23.10.1/release/ubuntu-23.10-live-server-arm64.iso"
-iso_checksum = "file:https://cdimage.ubuntu.com/releases/23.10.1/release/SHA256SUMS"
+# https://www.debian.org/releases/bookworm/debian-installer/
+#   https://cdimage.debian.org/debian-cd/12.5.0/
+#   current:
+#     https://cdimage.debian.org/cdimage/release/
+#       i.e.:  https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso
+#         FYI also: https://cdimage.debian.org/cdimage/release/current/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso
+#   archive (not current):
+#     https://cdimage.debian.org/cdimage/archive/
+#       i.e.:  https://cdimage.debian.org/cdimage/archive/11.9.0/arm64/iso-cd/debian-11.9.0-arm64-netinst.iso
+#   notes:
+#   - link changes once not current
+#     - most of the time I intend to build current only so this shouldn't be a huge deal
+#   - IIOC arm64 only has minimal netinst cd
+#     - and, amd64 only has full netinst cd
+#
+iso_url      = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso"
+iso_checksum = "file:https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/SHA256SUMS"
 
 box_dir          = "12"
 autoinstall_wait = "<wait4m>"
