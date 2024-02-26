@@ -34,10 +34,29 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get autoclean -y
 
-# TODO add any packages I want on all instances of this box:
-#  mlocate? (review config for this in bento too)
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  apt-file \
+  command-not-found \
+  fish \
+  grc \
+  lsof \
+  psmisc \
+  silversearcher-ag \
+  tree \
+  util-linux \
+  vim
+  # justify:
+  #  command-not-found + apt-file: given not doing the kitchen sink by default, this seems useful
+  # maybes:
+  #   plocate (bento)
+  # no:
+  #   pipx
+  # already present:
+  #   bash-completion
+  #   iproute2
+  #   procps
+  #   curl wget \
 
 # Notes w.r.t. bento/robox:
 # - cdrom in /etc/apt/sources.list is commented out so don't worry about it
 # - headers/kernel are both installed and upgraded b/c dist-upgrade (robox didn't do dist-upgrade and thus upgrades/installs kernel/headers)
-
