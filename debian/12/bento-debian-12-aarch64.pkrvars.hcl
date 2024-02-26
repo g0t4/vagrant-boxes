@@ -1,5 +1,0 @@
-os_name                 = "debian"
-os_version              = "12.5"
-os_arch                 = "aarch64"
-iso_url                 = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-dvd/debian-12.5.0-arm64-DVD-1.iso"
-iso_checksum            = "file:https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-dvd/SHA256SUMS"
