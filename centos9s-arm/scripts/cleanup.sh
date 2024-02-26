@@ -23,5 +23,4 @@ fi
 sudo systemctl --quiet is-active systemd-random-seed.service
 sudo systemctl stop systemd-random-seed.service
 [ -f /var/lib/systemd/random-seed ] && sudo rm --force /var/lib/systemd/random-seed
-
-# todo /etc/machine-id
+# TODO do I need to order cleanup to be last to avoid anything being recreated (ie if systemd-random-seed.service is restarted by some other part of my scripts?)
