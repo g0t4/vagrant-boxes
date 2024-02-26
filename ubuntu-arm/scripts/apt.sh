@@ -37,4 +37,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   silversearcher-ag \
   tree \
   util-linux \
-  vim
+  vim \
+  bash-completion \
+  iproute2 \
+  procps \
+  curl wget

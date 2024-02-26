@@ -39,18 +39,17 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   silversearcher-ag \
   tree \
   util-linux \
-  vim
+  vim \
+  bash-completion \
+  iproute2 \
+  procps \
+  curl wget
   # justify:
   #  command-not-found + apt-file: given not doing the kitchen sink by default, this seems useful
   # maybes:
   #   plocate (bento)
   # no:
   #   pipx
-  # already present:
-  #   bash-completion
-  #   iproute2
-  #   procps
-  #   curl wget \
 
 # Notes w.r.t. bento/robox:
 # - cdrom in /etc/apt/sources.list is commented out so don't worry about it
