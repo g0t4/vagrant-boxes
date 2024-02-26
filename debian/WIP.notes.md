@@ -1,3 +1,5 @@
 # TODO
 
 NEXT UP need to add/review scripts and that should be about it!!
+   FYI scripts as is worked, last build failed on shutdown command issue and then timed out waiting after I manually turned it off... must've just ran out of time which is fine b/c then it won't publish a build w/o script mods :)
+    sudo worked in `sudo systemctl poweroff` 
