@@ -7,18 +7,25 @@
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 
-
-
 # avoid deadlock during install:
-systemctl stop apt-daily.timer;
-systemctl stop apt-daily-upgrade.timer;
+systemctl stop \
+  apt-daily.timer \
+  apt-daily-upgrade.timer \
+  apt-daily.service \
+  apt-daily-upgrade.service
 # TODO do I really wanna disable apt timers/services for VMs booted from this box?
 # disable apt timers/services so they don't run on VMs booted from this box too:
-systemctl disable apt-daily.timer;
-systemctl disable apt-daily-upgrade.timer;
-systemctl mask apt-daily.service;
-systemctl mask apt-daily-upgrade.service;
-systemctl daemon-reload;
+systemctl disable \
+  apt-daily.timer \
+  apt-daily-upgrade.timer \
+  apt-daily.service \
+  apt-daily-upgrade.service
+systemctl mask \
+  apt-daily.service \
+  apt-daily-upgrade.service \
+  apt-daily-upgrade.timer \
+  apt-daily.timer
+systemctl daemon-reload
 # FYI don't modify default cleanup config, that way if someone wants to enable it, it's still there:
 #  /etc/apt/apt.conf.d/10periodic
 
