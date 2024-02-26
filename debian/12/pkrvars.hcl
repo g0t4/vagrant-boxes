@@ -20,7 +20,7 @@ box_dir          = "12"
 autoinstall_wait = "<wait4m>"
 
 box_org  = "wesdemos"
-box_name = "debian12" # not using -arm anymore now that arch is captured in box metadata
+box_name = "debian12-arm" # not using -arm anymore now that arch is captured in box metadata
 
 box_version      = "1.0.0"
 box_version_desc = "initial debian 12"
