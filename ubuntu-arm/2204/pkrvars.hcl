@@ -6,5 +6,5 @@ autoinstall_wait = "<wait2m>"
 box_org  = "wesdemos"
 box_name = "ubuntu2204-arm"
 
-box_version      = "1.1.0"
-box_version_desc = "jump to 22.04.4"
+box_version      = "1.1.1"
+box_version_desc = "ubuntu 22.04.4 arm64"

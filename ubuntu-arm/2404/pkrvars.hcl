@@ -7,5 +7,5 @@ autoinstall_wait = "<wait4m>"
 box_org  = "wesdemos"
 box_name = "ubuntu2404-arm"
 
-box_version      = "1.0.0"
-box_version_desc = "initial 24.04 daily build"
+box_version      = "1.0.1"
+box_version_desc = "ubuntu 24.04 daily-live arm64"
