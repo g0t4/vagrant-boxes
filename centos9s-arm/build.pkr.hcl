@@ -73,9 +73,9 @@ build {
   provisioner "shell" {
     timeout = "10m"
     scripts = [
-      "scripts/install.parallels.tools.sh",
+      "scripts/parallels.tools.sh",
       "scripts/apt.sh",
-      "scripts/vagrant.sh",
+      "scripts/vagrant-ssh.sh",
       "scripts/tuning.sh",
       "scripts/cleanup.sh",
     ]
