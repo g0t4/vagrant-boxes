@@ -25,11 +25,10 @@ sudo dnf --assumeyes install \
   util-linux \
   util-linux-user \
   vim-enhanced
-
   # not avail:
-  #   grc => config in downstream VM is fine
+  #   grc
   # no:
   #   PackageKit-command-not-found \
-  #     confusion when command hangs and I am less of a fan of being prompted (default) to install it... I'd rather be told about a package and that is it... but, I can add this downstream in Vagrantfile shell provisioners if I want it
+  #     confusion when command hangs and I am less of a fan of being prompted (default) to install it... I'd rather be told about a package and that is it... just add this downstream in Vagrantfile shell provisioners
   #     also `dnf whatprovides foo` exists
   #   pipx \
