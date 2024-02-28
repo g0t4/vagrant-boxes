@@ -14,7 +14,9 @@
 #     - and, amd64 only has full netinst cd
 #
 iso_url      = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso"
+# FYI last iso released: 2024-02-10 14:48	526M
 iso_checksum = "file:https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/SHA256SUMS"
+#
 # TODO try iso-dvd
 #   was wondering if DVD would work and then I stumbled on bento using it so I wanna try it at some point:
 #   iso_url = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-dvd/debian-12.5.0-arm64-DVD-1.iso"
