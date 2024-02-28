@@ -6,8 +6,8 @@ iso_checksum = "file:http://mirror.facebook.net/centos-stream/9-stream/BaseOS/aa
 box_org  = "wesdemos"
 box_name = "centos9s-arm"
 
-box_version      = "1.1.1"
-box_version_desc = "Build with latest (20240212.0) release"
+box_version      = "1.1.3"
+box_version_desc = "Build with latest (20240226.1) release"
 
 # FYI to find version of latest release:
 #  => http://atl.mirrors.knownhost.com/centos/9-stream/BaseOS/aarch64/iso
