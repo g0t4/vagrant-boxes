@@ -6,6 +6,7 @@ iso_url      = "https://cdimage.ubuntu.com/releases/23.10.1/release/ubuntu-23.10
 #   => https://cdimage.ubuntu.com/releases/23.10.1/release/
 #     => see if arm64 server link still points to 23.10
 #     also FYI, scroll to bottom => review files
+#       review date: last was 2023-10-11 04:56
 
 iso_checksum = "file:https://cdimage.ubuntu.com/releases/23.10.1/release/SHA256SUMS"
 
