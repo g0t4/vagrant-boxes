@@ -1,4 +1,7 @@
 iso_url      = "https://cdimage.ubuntu.com/ubuntu-server/daily-live/current/noble-live-server-arm64.iso"
+# find lastes version:
+#   https://cdimage.ubuntu.com/ubuntu-server/daily-live/current
+#   last build: 	2024-02-22 06:52
 iso_checksum = "file:https://cdimage.ubuntu.com/ubuntu-server/daily-live/current/SHA256SUMS"
 
 box_dir          = "2404"
