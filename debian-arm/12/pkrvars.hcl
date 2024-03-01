@@ -28,5 +28,5 @@ autoinstall_wait = "<wait4m>" # TODO do I need to add this to bootcmd? OR NUKE I
 box_org  = "wesdemos"
 box_name = "debian12-arm" # not using -arm anymore now that arch is captured in box metadata
 
-box_version      = "1.1.3"
+box_version      = "1.1.4"
 box_version_desc = "debian 12 arm64"
