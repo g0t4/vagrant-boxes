@@ -16,5 +16,5 @@ autoinstall_wait = "<wait4m>"
 box_org  = "wesdemos"
 box_name = "ubuntu2310-arm"
 
-box_version      = "1.1.4"
+box_version      = "1.1.5" # TODO
 box_version_desc = "ubuntu 23.10 arm64"
