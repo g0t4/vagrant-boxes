@@ -1,4 +1,4 @@
-iso_url          = "https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-live-server-arm64.iso"
+iso_url = "https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-live-server-arm64.iso"
 # https://cdimage.ubuntu.com/releases/22.04.4/release
 #   look for ubuntu-22.04.4-live-server-arm64.iso
 #     last 2024-02-20 00:52

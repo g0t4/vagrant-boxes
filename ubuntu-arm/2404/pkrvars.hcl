@@ -1,4 +1,4 @@
-iso_url      = "https://cdimage.ubuntu.com/ubuntu-server/daily-live/current/noble-live-server-arm64.iso"
+iso_url = "https://cdimage.ubuntu.com/ubuntu-server/daily-live/current/noble-live-server-arm64.iso"
 # find latest iso:
 #   https://cdimage.ubuntu.com/ubuntu-server/daily-live/current
 #   find noble-live-server-arm64.iso
