@@ -6,5 +6,5 @@ vagrant_cloud_token
 export PYTHONPATH=/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
 
 packer build -on-error ask -timestamp-ui \
-  -var-file="2310/pkrvars.hcl" \
+  -var-file="2410/pkrvars.hcl" \
   .
