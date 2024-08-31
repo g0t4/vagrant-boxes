@@ -6,4 +6,17 @@ Vagrant.configure("2") do |config|
   config.vm.box = "test-ubuntu2404-arm"
   config.vm.box_url = "file://../out/packer_ubuntu2404-arm_parallels.box"
 
+  config.vm.provider "parallels" do |prl|
+    # FYI parallels provider config docs: https://parallels.github.io/vagrant-parallels/docs/configuration.html
+
+    # prl.memory = 32768
+    # prl.cpus = 10
+
+    # If want bigger drive, I started to test this but it isn't working (not automatically)
+    # prl.linked_clone = false # needed to resize disk, but false means slower initial creation
+    # prl.customize ["set", :id, "--device-set=hdd0", "--size=150G"] # still have to halt VM and delete the initial snapshot too and then this works (makes some default linked clone snapshot)
+    #  still just need to manually resize for now... some warning about file system not recognized or smth
+    
+  end
+
 end
