@@ -13,12 +13,12 @@ packer {
 
 # vagrant registry:
 variable "client_id" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
 variable "client_secret" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
 
 variable "iso_url" { type = string }
@@ -109,18 +109,18 @@ build {
     # https://developer.hashicorp.com/packer/integrations/hashicorp/vagrant/latest/components/post-processor/vagrant-registry
     post-processor "vagrant-registry" {
 
-        client_id = "${var.client_id}"
-        client_secret = "${var.client_secret}"
-        box_tag = "${local.box_tag}"
-        version = "${var.box_version}"
-        # keep_input_artifact = true # default = true
-        # no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
-        version_description = "${var.box_version_desc}"
+      client_id     = "${var.client_id}"
+      client_secret = "${var.client_secret}"
+      box_tag       = "${local.box_tag}"
+      version       = "${var.box_version}"
+      # keep_input_artifact = true # default = true
+      # no_release = "true" # is this a string or bool or otherwise? docs say string but then say default = false...
+      version_description = "${var.box_version_desc}"
 
-        # TODO architecture
-        # architecture = "${local.architecture}" # s/b detected by box? 
-        # otherwise set arm64? https://developer.hashicorp.com/packer/integrations/hashicorp/vagrant/latest/components/post-processor/vagrant-registry#optional
-        # default_architecture # again see if it flags automatically
+      # TODO architecture
+      # architecture = "${local.architecture}" # s/b detected by box? 
+      # otherwise set arm64? https://developer.hashicorp.com/packer/integrations/hashicorp/vagrant/latest/components/post-processor/vagrant-registry#optional
+      # default_architecture # again see if it flags automatically
 
     }
 
