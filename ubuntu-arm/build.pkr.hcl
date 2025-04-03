@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     parallels = {
-      version = ">=1.0.3"
+      version = ">=1.1.0"
       source  = "github.com/hashicorp/parallels"
     }
     vagrant = {
