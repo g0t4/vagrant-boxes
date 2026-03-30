@@ -3,14 +3,10 @@ autoinstall:
   apt:
     disable_components: []
     geoip: true
+    # geoip: false
     preserve_sources_list: false
     primary:
-      - arches:
-          - amd64
-          - i386
-        uri: http://archive.ubuntu.com/ubuntu
-      - arches:
-          - default
+      - arches: [default]
         uri: http://us.ports.ubuntu.com/ubuntu-ports
   drivers:
     install: false
