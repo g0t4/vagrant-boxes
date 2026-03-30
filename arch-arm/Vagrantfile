@@ -1,0 +1,9 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "test-arch-arm"
+  config.vm.box_url = "file://out/packer_arch-arm_parallels.box"
+
+end
