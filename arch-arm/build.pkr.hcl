@@ -100,10 +100,10 @@ build {
   # vagrant user has passwordless sudo (set up in install.sh)
   provisioner "shell" {
     scripts = [
-      # "scripts/parallels.tools.sh", # TODO: parallels tools fails on arch, troubleshoot separately
       "scripts/pacman.sh",
       "scripts/networking.sh",
       "scripts/vagrant-ssh.sh",
+      "scripts/parallels.tools.sh", # TODO: parallels tools fails on arch, troubleshoot separately
       "scripts/cleanup.sh",
     ]
   }
