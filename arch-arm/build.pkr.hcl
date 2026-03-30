@@ -53,48 +53,37 @@ source "parallels-iso" "arch-arm" {
 
   http_directory = "http" # serves install.sh
 
-  # TODO: boot_command needs verification by booting archboot interactively first
-  # Archboot aarch64 boots with GRUB, then starts its own setup TUI on TTY1.
-  # Goals: exit the TUI, get a root shell, run install.sh via curl.
+  # Archboot boot sequence (for reference when tuning boot_command):
   #
-  # Approach A (below): modify GRUB entry to boot into rescue.target (skip TUI)
-  #   - press 'e' at GRUB menu to edit default entry
-  #   - navigate to 'linux ...' kernel line and append systemd.unit=rescue.target
-  #   - ctrl+x to boot, wait, get rescue shell, then start networking manually
+  # 1. Parallels VM starts, GRUB menu appears
+  #    - GRUB has a countdown timer (auto-boots into archboot after timeout)
+  #    - No interaction needed
   #
-  # Approach B (commented out): let archboot TUI start, exit to shell
-  #   - wait longer for TUI to appear, navigate menu to "Shell" option
-  #   - archboot menus often have a numbered or arrow-key-navigated "Exit/Shell" choice
+  # 2. Archboot loads
+  #    - Virtual terminal appears ~2 seconds after GRUB boots
+  #    - Welcome screen displays:
+  #        "Welcome to Archboot - Arch Linux AARCH64"
+  #        ...
+  #        "Hit ENTER for login routine or CTRL-C for bash prompt."
+  #    - Networking (DHCP) is already configured at this point
+  #    - setup = interactive TUI installer (NOT auto-started, must run manually)
+  #
+  # 3. Ctrl+C → immediate root bash prompt [root@archboot /]#
+  #    - No password needed
+  #    - curl, fdisk, pacstrap, arch-chroot all available
+  #
+  # Total time from VM start to ready prompt: GRUB timeout + ~2s
+  # <wait20s> has been sufficient in testing
   boot_command = [
-    # Wait for GRUB menu to appear
-    "<wait10>",
+    # Wait for GRUB to auto-boot + archboot to start + welcome screen to appear
+    "<wait20s>",
 
-    # Edit the default GRUB entry to skip archboot's setup TUI
-    "e",
+    # Get a bash prompt directly (skip the login routine)
+    "<leftCtrlOn>c<leftCtrlOff>",
     "<wait2>",
 
-    # Navigate to the 'linux' kernel line (line count varies - adjust <down> count as needed)
-    # In archboot GRUB edit, the linux line is typically 8-10 lines down
-    "<down><down><down><down><down><down><down><down>",
-    "<end>",
-    # Skip archboot's interactive setup service, boot to rescue shell instead
-    " systemd.unit=rescue.target",
-
-    # Boot with ctrl+x
-    "<leftCtrlOn>x<leftCtrlOff>",
-
-    # Wait for rescue shell (~2-3 min for archboot kernel + systemd to start)
-    "<wait3m>",
-
-    # Rescue shell auto-logins as root (or press enter if prompted)
-    "<enter><wait5>",
-
-    # Start network (rescue.target doesn't start networking)
-    "systemctl start systemd-networkd.service<enter><wait10>",
-    "systemctl start systemd-resolved.service<enter><wait5>",
-
-    # Download and run installation script
-    # install.sh partitions, formats, pacstraps, configures, and reboots
+    # Download and run installation script from packer's HTTP server
+    # install.sh partitions, formats, pacstraps, configures grub, and reboots
     "curl http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh | bash<enter>",
 
     # Packer waits for SSH to come up on the newly installed system (ssh_timeout = 30m)

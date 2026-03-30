@@ -1,19 +1,29 @@
 #!/bin/bash -eux
 
 # Arch Linux installation script
-# Runs from archboot live environment (rescue.target shell)
+# Runs from archboot live environment (bash prompt after Ctrl+C)
 # Partitions /dev/sda, installs base system, configures, reboots into installed system
 # Packer then SSHes into the installed system as vagrant to run provisioner scripts
 
 # ===== DISK SETUP =====
 # Parallels presents the virtual disk as /dev/sda
 # GPT with EFI System Partition + root
+# Note: parted not available in archboot, use fdisk
 
-parted --script /dev/sda \
-  mklabel gpt \
-  mkpart ESP fat32 1MiB 512MiB \
-  set 1 esp on \
-  mkpart primary ext4 512MiB 100%
+fdisk /dev/sda << 'FDISK'
+g
+n
+1
+
++512M
+t
+1
+n
+2
+
+
+w
+FDISK
 
 # Give kernel a moment to see new partition table
 sleep 2
@@ -82,9 +92,30 @@ chmod 440 /etc/sudoers.d/wheel
 
 # GRUB for ARM64 EFI (/boot is the EFI partition)
 grub-install --target=arm64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
-grub-mkconfig -o /boot/grub/grub.cfg
 
 CHROOT
+
+# ===== GRUB CONFIG =====
+# grub-mkconfig doesn't detect ARM64 kernel (looks for vmlinuz-linux, but ARM64 uses Image)
+# Write grub.cfg manually with UUIDs from freshly formatted partitions
+EFI_UUID=$(blkid -s UUID -o value /dev/sda1)
+ROOT_UUID=$(blkid -s UUID -o value /dev/sda2)
+cat > /mnt/boot/grub/grub.cfg << EOF
+set default=0
+set timeout=1
+
+menuentry 'Arch Linux' {
+    search --no-floppy --fs-uuid --set=root $EFI_UUID
+    linux /Image root=UUID=$ROOT_UUID rw quiet
+    initrd /initramfs-linux.img
+}
+
+menuentry 'Arch Linux (fallback)' {
+    search --no-floppy --fs-uuid --set=root $EFI_UUID
+    linux /Image root=UUID=$ROOT_UUID rw
+    initrd /initramfs-linux-fallback.img
+}
+EOF
 
 # ===== DONE =====
 umount -R /mnt
