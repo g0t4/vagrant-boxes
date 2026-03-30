@@ -79,8 +79,8 @@ HOSTS
 # Trust the Arch Linux ARM signing key
 # (pacstrap -K only initializes the standard archlinux keyring, not archlinuxarm)
 pacman-key --populate archlinuxarm
+# without trusting this key, pacman installs will fail after rebooting into new machine
 
-# Networking
 systemctl enable NetworkManager
 
 # SSH - enable and allow password auth for packer to connect

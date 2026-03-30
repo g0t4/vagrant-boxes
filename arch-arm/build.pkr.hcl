@@ -38,13 +38,13 @@ source "parallels-iso" "arch-arm" {
 
   ssh_username           = "vagrant"
   ssh_password           = "vagrant"
-  ssh_timeout            = "30m"
+  ssh_timeout            = "10m"
   ssh_handshake_attempts = 20
 
   parallels_tools_flavor = "lin-arm"
   shutdown_command       = "echo 'vagrant' | sudo -S shutdown -P now"
   guest_os_type          = "linux" # prlctl create x --distribution list
-  host_interfaces        = ["en0", "en1", "en2", "en3", "en4", "en5", "en6", "en7", "en8", "en9", "en10", "en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18", "en19", "en20", "ppp0", "ppp1", "ppp2"]
+  # host_interfaces        = ["en0", "en1", "en2", "en3", "en4", "en5", "en6", "en7", "en8", "en9", "en10", "en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18", "en19", "en20", "ppp0", "ppp1", "ppp2"]
   # default list of host_interfaces checked stops at en9: https://github.com/Parallels/packer-plugin-parallels/blob/master/builder/parallels/iso/builder.go#L147-L151
 
   cpus      = 4
@@ -72,10 +72,9 @@ source "parallels-iso" "arch-arm" {
   #    - No password needed
   #    - curl, fdisk, pacstrap, arch-chroot all available
   #
-  # Total time from VM start to ready prompt: GRUB timeout + ~2s
-  # <wait20s> has been sufficient in testing
   boot_command = [
     # Wait for GRUB to auto-boot + archboot to start + welcome screen to appear
+    # Total time from VM start to ready prompt: GRUB timeout + ~3s
     "<wait20s>",
 
     # Get a bash prompt directly (skip the login routine)
@@ -86,7 +85,7 @@ source "parallels-iso" "arch-arm" {
     # install.sh partitions, formats, pacstraps, configures grub, and reboots
     "curl http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh | bash<enter>",
 
-    # Packer waits for SSH to come up on the newly installed system (ssh_timeout = 30m)
+    # Packer waits for SSH
   ]
 
   vm_name          = "build-${var.box_name}"
