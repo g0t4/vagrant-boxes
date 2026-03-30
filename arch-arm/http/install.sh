@@ -51,7 +51,8 @@ pacstrap -K /mnt \
   curl \
   git \
   vim \
-  fish
+  fish \
+  archlinuxarm-keyring
 
 genfstab -U /mnt >>/mnt/etc/fstab
 
@@ -74,6 +75,10 @@ cat >>/etc/hosts <<'HOSTS'
 ::1         localhost
 127.0.1.1   arch.localdomain arch
 HOSTS
+
+# Trust the Arch Linux ARM signing key
+# (pacstrap -K only initializes the standard archlinux keyring, not archlinuxarm)
+pacman-key --populate archlinuxarm
 
 # Networking
 systemctl enable NetworkManager
