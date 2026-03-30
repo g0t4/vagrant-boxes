@@ -3,7 +3,7 @@ autoinstall:
   apt:
     disable_components: []
     geoip: true
-    # geoip: false
+    # geoip: false # TODO disable?
     preserve_sources_list: false
     primary:
       - arches: [default]
