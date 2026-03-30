@@ -103,7 +103,7 @@ build {
       "scripts/pacman.sh",
       "scripts/networking.sh",
       "scripts/vagrant-ssh.sh",
-      "scripts/parallels.tools.sh", # TODO: parallels tools fails on arch, troubleshoot separately
+      "scripts/parallels.tools.sh",
       "scripts/cleanup.sh",
     ]
   }
