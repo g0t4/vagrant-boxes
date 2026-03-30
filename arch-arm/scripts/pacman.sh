@@ -16,7 +16,6 @@ sudo pacman -S --noconfirm --needed \
   git-lfs \
   grc \
   httpie \
-  hwinfo \
   jq \
   less \
   lshw \
@@ -37,6 +36,8 @@ sudo pacman -S --noconfirm --needed \
   vim \
   wget \
   which
+
+# aarch64 has no `hwinfo` pkg
 
 # Clean package cache
 sudo pacman -Scc --noconfirm
