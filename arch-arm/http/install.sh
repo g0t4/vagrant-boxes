@@ -51,8 +51,11 @@ pacstrap -K /mnt \
   curl \
   git \
   vim \
+  neovim \
   fish \
+  inetutils \
   archlinuxarm-keyring
+# inetutils provides hostname (else not available)
 
 genfstab -U /mnt >>/mnt/etc/fstab
 
