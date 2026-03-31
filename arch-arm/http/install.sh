@@ -53,9 +53,14 @@ pacstrap -K /mnt \
   vim \
   neovim \
   fish \
+  less \
+  iproute2 \
+  tree \
   inetutils \
   archlinuxarm-keyring
-# inetutils provides hostname (else not available)
+# * inetutils provides hostname (else not available)
+# * archlinuxarm-keyring else no package installs! (no trust) adds gpg key
+#   btw IIRC archboot is the only distribution I can use to pacstrap aarch64
 
 genfstab -U /mnt >>/mnt/etc/fstab
 

@@ -7,33 +7,25 @@ sudo pacman -Syu --noconfirm
 sudo pacman -S --noconfirm --needed \
   bat \
   bash-completion \
-  curl \
   dust \
   fzf \
-  fish \
-  git \
   git-delta \
   git-lfs \
   grc \
   httpie \
   jq \
-  less \
   lshw \
   most \
-  neovim \
   nmap \
-  iproute2 \
   lsof \
   procps-ng \
   psmisc \
   ripgrep \
   strace \
-  tree \
   trash-cli \
   unzip \
   uv \
   util-linux \
-  vim \
   wget \
   which
 
