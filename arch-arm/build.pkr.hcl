@@ -75,7 +75,7 @@ source "parallels-iso" "arch-arm" {
   boot_command = [
     # Wait for GRUB to auto-boot + archboot to start + welcome screen to appear
     # Total time from VM start to ready prompt: GRUB timeout + ~3s
-    "<wait20s>",
+    "<wait10s>",
 
     # Get a bash prompt directly (skip the login routine)
     "<leftCtrlOn>c<leftCtrlOff>",
