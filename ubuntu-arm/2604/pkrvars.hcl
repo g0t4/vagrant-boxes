@@ -20,6 +20,6 @@ autoinstall_wait = "<wait4m>"
 box_org  = "wesdemos"
 box_name = "ubuntu2604-arm"
 
-box_version      = "1.0.0" # originally released march build under 1.0.0... and forgot to bump for may build... just FYI...
+box_version      = "1.0.1" # next build should be 1.0.1
 box_version_desc = "Ubuntu Server 26.04 (Resolute Raccoon) Daily Live arm64"
 # box_version_desc = "ubuntu 26.04.2 arm64"
