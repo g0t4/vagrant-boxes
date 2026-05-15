@@ -12,8 +12,9 @@ autoinstall:
     primary:
       - arches: [default]
         uri: http://us.ports.ubuntu.com/ubuntu-ports
-  # FYI skipping OEM install detection b/c it appeared to deadlock the install and then things worked after I disabled it:
   oem:
+    # FYI skipping OEM install detection b/c it appeared to deadlock the install and then things worked after I disabled it:
+    # btw oem: install was added in subiquity 26.04 (along w/ server 26.04 release): https://github.com/canonical/subiquity/releases/tag/26.04
     install: false
   drivers:
     install: false
