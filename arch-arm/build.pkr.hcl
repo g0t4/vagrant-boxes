@@ -78,7 +78,7 @@ source "parallels-iso" "arch-arm" {
     # Total time from VM start to ready prompt: GRUB timeout + ~3s
     "<ENTER>", # just in case, accept default grub selection if still showing (has long countdown)... slow VM startup might result in this... does not hurt!
 
-    "<wait20s>", # 15 seconds AT least in my estimate... wow for that initial expanding menu now
+    "<wait18s>", # 15 seconds AT least in my estimate... wow for that initial expanding menu now
     # Get a bash prompt directly (skip the login routine)
     "<leftCtrlOn>c<leftCtrlOff>",
 
