@@ -72,6 +72,7 @@ source "parallels-iso" "arch-arm" {
   #    - No password needed
   #    - curl, fdisk, pacstrap, arch-chroot all available
   #
+  boot_wait = "5s" # shorten this so I can hit ENTER to bypass grub's countdown... btw can probably set this to 3 as grub shows before "Waiting xs for boot..." message
   boot_command = [
     # Wait for GRUB to auto-boot + archboot to start + welcome screen to appear
     # Total time from VM start to ready prompt: GRUB timeout + ~3s
