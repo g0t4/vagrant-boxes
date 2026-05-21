@@ -10,5 +10,5 @@ autoinstall_wait = "<wait4m>"
 box_org  = "wesdemos"
 box_name = "ubuntu2510-arm"
 
-box_version      = "1.0.0"
+box_version      = "1.1.9"
 box_version_desc = "Ubuntu Server 25.10 arm64"
