@@ -75,12 +75,13 @@ source "parallels-iso" "arch-arm" {
   boot_command = [
     # Wait for GRUB to auto-boot + archboot to start + welcome screen to appear
     # Total time from VM start to ready prompt: GRUB timeout + ~3s
-    "<wait10s>",
+    "<ENTER>", # just in case, accept default grub selection if still showing (has long countdown)... slow VM startup might result in this... does not hurt!
 
+    "<wait20s>", # 15 seconds AT least in my estimate... wow for that initial expanding menu now
     # Get a bash prompt directly (skip the login routine)
     "<leftCtrlOn>c<leftCtrlOff>",
-    "<wait2>",
 
+    "<wait4s>",
     # Download and run installation script from packer's HTTP server
     # install.sh partitions, formats, pacstraps, configures grub, and reboots
     "curl http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh | bash<enter>",
