@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/usr/bin/env fish -i
 
 vagrant_cloud_token
 
@@ -6,5 +6,7 @@ vagrant_cloud_token
 export PYTHONPATH=/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
 
 packer build -on-error ask -timestamp-ui \
-  -var-file="native/pkrvars.hcl" \
+  -var-file="emulated/pkrvars.hcl" \
+  -var="client_id=$VAGRANT_HCP_CLIENT_ID" \
+  -var="client_secret=$VAGRANT_HCP_CLIENT_SECRET" \
   .
