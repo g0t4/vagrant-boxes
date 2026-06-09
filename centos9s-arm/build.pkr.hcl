@@ -11,6 +11,16 @@ packer {
 variable "iso_url" { type = string }
 variable "iso_checksum" { type = string }
 
+# vagrant registry credentials (required for post-processor)
+variable "client_id" {
+  type      = string
+  sensitive = true
+}
+variable "client_secret" {
+  type      = string
+  sensitive = true
+}
+
 variable "box_org" { type = string }
 variable "box_name" { type = string }
 local "box_tag" { expression = "${var.box_org}/${var.box_name}" }
@@ -90,7 +100,9 @@ build {
       compression_level = 9 # default = 6
     }
 
-    post-processor "vagrant-cloud" {
+    post-processor "vagrant-registry" {
+      client_id           = "${var.client_id}"
+      client_secret       = "${var.client_secret}"
       box_tag             = "${local.box_tag}"
       version             = "${var.box_version}"
       version_description = "${var.box_version_desc}"

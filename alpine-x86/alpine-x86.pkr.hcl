@@ -2,6 +2,16 @@
 variable "boot_wait" { type = string }
 variable "pause_after_reboot" { type = string }
 
+# vagrant registry credentials (required for post-processor)
+variable "client_id" {
+  type      = string
+  sensitive = true
+}
+variable "client_secret" {
+  type      = string
+  sensitive = true
+}
+
 # todo map type?
 variables {
   box_tag                 = "wesdemos/alpine316-x86"
@@ -40,7 +50,7 @@ source "virtualbox-iso" "alpine316-x86-virtualbox" {
   # timing: 6ish minutes to run boot_command (as is 2022-10-22), just < 2 minutes to boot back up after reboot at end of boot_command
   #  issue: reboot defaults to CD installer... if I eject that and then reboot it starts up with installed alpine... does packer have option to eject drive?
   # boot_command script choked on last long command - repetative output (after reboot) showed something about changing the root password - over and over it scrolled insanely quickly - so something on reboot is behaving - or was it? what was sending key strokes after reboot?
-  # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\ VM
+  # TODO resume here with testing - run boot_command by hand and/or record system with vbox to find issue - and don't let packer cleanup anything until save recording outside ~/VirtualBox\\ VM
   #  todo - lovely - vbox 7 has bug - open settings alters NIC 1 (maybe all NICs) to use NAT even if configured Bridged or otherwise... so make sure to set settings for NIC anytime changes made (or don't use vbox gui to change any settings)... 
   #   TODO => Means when I eject disk with settings I have to fix NIC.. can I eject otherwise? like with command in system? 
   #    won't need to worry about this if not manually changing settings which hopefully not have to with packer/vagrant ;)... I do have a working VM VDI so I might use builder to turn that into vagrant box instead of obsessing over packer from ISO when I just want a POC for vagrant box with x86 emulation on arm macs... 
@@ -139,7 +149,9 @@ build {
       vagrantfile_template = "template-vagrantfile.rb"
       keep_input_artifact  = false
     }
-    post-processor "vagrant-cloud" {
+    post-processor "vagrant-registry" {
+      client_id           = "${var.client_id}"
+      client_secret       = "${var.client_secret}"
       box_tag             = "${var.box_tag}"
       version             = "${var.box_version}"
       version_description = "${var.box_version_description}"

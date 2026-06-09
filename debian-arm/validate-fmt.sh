@@ -1,7 +1,9 @@
 #!/usr/bin/env fish
 
-# Note: uses vagrant-cloud post-processor (older API) which requires auth during validate.
-# Only run fmt here - validation requires real VAGRANT_CLOUD_TOKEN.
+# validate both builds
+packer validate -var-file="12/pkrvars.hcl" \
+    -var="client_id=dummy" \
+    -var="client_secret=dummy" .
 
 # fmt all files
 packer fmt .
