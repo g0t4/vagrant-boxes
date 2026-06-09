@@ -13,7 +13,7 @@
 #   - IIOC arm64 only has minimal netinst cd
 #     - and, amd64 only has full netinst cd
 #
-iso_url      = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso"
+iso_url = "https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/debian-12.5.0-arm64-netinst.iso"
 # FYI last iso released: 2024-02-10 14:48	526M
 iso_checksum = "file:https://cdimage.debian.org/cdimage/release/12.5.0/arm64/iso-cd/SHA256SUMS"
 #

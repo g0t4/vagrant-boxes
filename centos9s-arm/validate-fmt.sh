@@ -1,8 +1,7 @@
 #!/usr/bin/env fish
 
-vagrant_cloud_token
-
-packer validate -var-file="pkrvars.hcl" .
+# Note: uses vagrant-cloud post-processor (older API) which requires auth during validate.
+# Only run fmt here - validation requires real VAGRANT_CLOUD_TOKEN.
 
 # fmt all files
 packer fmt .
