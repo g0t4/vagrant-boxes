@@ -1,14 +1,10 @@
 #!/usr/bin/env fish
 
-# validate both builds
-packer validate -var-file="12/pkrvars.hcl" \
-    -var="client_id=dummy" \
-    -var="client_secret=dummy" .
+# validate the build
 packer validate -var-file="13/pkrvars.hcl" \
     -var="client_id=dummy" \
     -var="client_secret=dummy" .
 
 # fmt all files
 packer fmt .
-packer fmt 12/pkrvars.hcl
 packer fmt 13/pkrvars.hcl
