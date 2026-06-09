@@ -1,4 +1,4 @@
-# Qwen Reference: Ubuntu/Arch Linux Box Updates & Creation
+# Qwen Reference: Vagrant Box Updates & Creation
 
 ## Quick Reference
 
@@ -6,37 +6,37 @@
 
 **Ubuntu Official Releases:**
 ```bash
-# Check latest release
 curl -sL https://cdimage.ubuntu.com/releases/<VERSION>/release/ | grep -i "live-server-arm64"
-
-# Get checksums
 curl -sL https://cdimage.ubuntu.com/releases/<VERSION>/release/SHA256SUMS | grep arm64
 ```
 
 **Ubuntu Daily-Live (dev releases):**
 ```bash
-# Check daily-live (only available during development cycle)
 curl -sL https://cdimage.ubuntu.com/ubuntu-server/daily-live/current/ | grep -i "live-server-arm64"
 ```
 
 **Ubuntu Snapshots (early test builds):**
 ```bash
-# Check snapshots (published before daily-live starts)
 curl -sL https://cdimage.ubuntu.com/releases/<VERSION>/snapshot-1/ | grep -i "live-server-arm64"
 ```
 
 **Arch Linux (Archboot for ARM):**
 ```bash
-# Arch only ships x86_64 officially; use archboot for aarch64
 curl -sL https://release.archboot.com/aarch64/latest/iso/ | grep -i "aarch64"
-
-# Get checksums (Archboot provides BLAKE2b only)
 curl -sL https://release.archboot.com/aarch64/latest/b2sum.txt | grep -i "aarch64-ARCH-aarch64.iso"
 ```
 
-### 2. Compute SHA256 for Archboot (BLAKE2b → SHA256)
+**Debian:**
+```bash
+curl -sL https://cdimage.debian.org/cdimage/release/ | grep -oE 'debian-[0-9]+\.[0-9]+' | sort -V | tail -1
+curl -sL "https://cdimage.debian.org/cdimage/release/<VER>/arm64/iso-cd/" | grep -oE 'href="[^"]+\.iso"' | head -1
+```
 
-Packer doesn't support BLAKE2b natively, so download and compute:
+### 2. Compute SHA256
+
+**Ubuntu/Debian:** Get from `SHA256SUMS` file directly.
+
+**Archboot (BLAKE2b → SHA256):** Packer doesn't support BLAKE2b natively, so download and compute:
 ```bash
 cd /tmp
 curl -L -o archboot.iso https://release.archboot.com/aarch64/latest/iso/<ISO_NAME>
@@ -44,7 +44,35 @@ shasum -a 256 archboot.iso
 rm archboot.iso
 ```
 
-### 3. Update Existing Box Version (e.g., 26.04 daily-live → official)
+### 3. Packer Configuration Changes (vagrant-cloud → vagrant-registry)
+
+**IMPORTANT:** All distros now use the newer `vagrant-registry` post-processor instead of the older `vagrant-cloud`.
+
+**Before (old):**
+```hcl
+post-processor "vagrant-cloud" {
+  box_tag             = "${var.box_tag}"
+  version             = "${var.box_version}"
+}
+# Requires VAGRANT_CLOUD_TOKEN env var
+```
+
+**After (new):**
+```hcl
+variable "client_id" { type = string; sensitive = true }
+variable "client_secret" { type = string; sensitive = true }
+
+post-processor "vagrant-registry" {
+  client_id           = "${var.client_id}"
+  client_secret       = "${var.client_secret}"
+  box_tag             = "${local.box_tag}"
+  version             = "${var.box_version}"
+}
+```
+
+This allows `packer validate` to run with dummy credentials instead of requiring real tokens.
+
+### 4. Update Existing Box Version (e.g., Ubuntu 26.04 daily-live → official)
 
 **File:** `<dir>/pkrvars.hcl`
 
@@ -68,7 +96,7 @@ box_version = "<new-version>"
   - Official release from daily-live: `1.1.9` → `1.2.0` (minor bump)
   - New snapshot: `1.0.0` (first release of that snapshot)
 
-### 4. Create New Box Version Directory
+### 5. Create New Box Version Directory
 
 **Directory structure:** `<version>/pkrvars.hcl`, `<version>/Vagrantfile`, `<version>/info.json`
 
@@ -144,38 +172,47 @@ validate "<VERSION>/pkrvars.hcl"
 packer fmt <VERSION>/pkrvars.hcl
 ```
 
-### 5. Validate and Format
+### 6. Validate and Format
 
+**Ubuntu (uses validate-fmt.fish):**
 ```bash
 cd ubuntu-arm
 fish validate-fmt.fish
 ```
 
+**Other distros (uses validate-fmt.sh with dummy creds):**
+```bash
+cd <distro-dir>
+fish validate-fmt.sh
+```
+
 This runs:
-- `packer validate -var-file="<dir>/pkrvars.hcl"` for each version
+- `packer validate -var-file="<dir>/pkrvars.hcl" -var="client_id=dummy" -var="client_secret=dummy"`
 - `packer fmt <dir>/pkrvars.hcl` to auto-format HCL files
 
-### 6. Run the Build
+### 7. Run the Build
 
 **With credentials (full build + Vagrant Cloud upload):**
 ```bash
-cd ubuntu-arm
+cd <distro-dir>
 ./build.<VERSION>.fish
 # or: fish build.<VERSION>.fish
 ```
 
 **Without credentials (local box only, for testing):**
 ```bash
-cd ubuntu-arm
-packer build -var-file="<VERSION>/pkrvars.hcl" .
+cd <distro-dir>
+packer build -var-file="<VERSION>/pkrvars.hcl" \
+  -var="client_id=dummy" \
+  -var="client_secret=dummy" .
 ```
 
 **Expected output:**
 - Build takes ~7-10 minutes
-- Local box created at `out/packer_ubuntu<VERSION>-arm_parallels.box`
-- Vagrant Cloud upload to `wesdemos/ubuntu<VERSION>-arm` (version <box_version>)
+- Local box created at `out/packer_<box_name>_parallels.box`
+- Vagrant Cloud upload to `wesdemos/<box_name>` (version <box_version>)
 
-### 7. Common Issues & Fixes
+### 8. Common Issues & Fixes
 
 **Vagrant Cloud auth fails:**
 ```
@@ -192,18 +229,47 @@ chmod +x build.<VERSION>.fish
 ```bash
 # Test without Vagrant Cloud registry
 packer validate -var-file="<VERSION>/pkrvars.hcl" \
-  -var="client_id=test" \
-  -var="client_secret=test" \
-  .
+  -var="client_id=dummy" \
+  -var="client_secret=dummy" .
 ```
 
-### 8. Commit Strategy
+### 9. Commit Strategy
 
 ```bash
 cd /Users/wes/repos/github/g0t4/vagrant-boxes
-git add ubuntu-arm/<VERSION>/ ubuntu-arm/build.<VERSION>.fish ubuntu-arm/validate-fmt.fish
-git commit -m "ubuntu-arm: add Ubuntu <VERSION> (<CODENAME>) build"
+git add <distro>/<VERSION>/ <distro>/build.<VERSION>.fish <distro>/validate-fmt.sh
+git commit -m "<distro>: add <OS> <VERSION> (<CODENAME>) build"
 ```
+
+## Distro-Specific Notes
+
+### Ubuntu ARM (`ubuntu-arm/`)
+- Uses `vagrant-registry` post-processor with inline dummy creds for validation
+- Build scripts: `build.2204.fish`, `build.2404.fish`, `build.2510.fish`, `build.2604.fish`, `build.2610.fish`
+- Validation script: `validate-fmt.fish`
+
+### Arch ARM (`arch-arm/`)
+- Uses Archboot (only aarch64 ISO available)
+- BLAKE2b checksums must be converted to SHA256 manually
+- Build script: `build.fish`
+- Validation script: `validate-fmt.sh`
+
+### Debian ARM (`debian-arm/`)
+- Currently supports only Debian 13 ("Trixie")
+- Uses `vagrant-registry` post-processor with inline dummy creds for validation
+- Build script: `build.13.fish`
+- Validation script: `validate-fmt.sh`
+
+### Alpine x86 (`alpine-x86/`)
+- Supports emulated and native builds
+- Uses `vagrant-registry` post-processor with inline dummy creds for validation
+- Build scripts: `build.emulated.fish`, `build.native.fish`
+- Validation script: `validate-fmt.sh`
+
+### CentOS 9 Stream (`centos9s-arm/`)
+- Uses `vagrant-registry` post-processor with inline dummy creds for validation
+- Build script: `build.fish`
+- Validation script: `validate-fmt.sh`
 
 ## Ubuntu Release Cycle Reference
 
@@ -217,4 +283,5 @@ git commit -m "ubuntu-arm: add Ubuntu <VERSION> (<CODENAME>) build"
 
 - **Ubuntu ISOs:** https://cdimage.ubuntu.com/
 - **Archboot ARM:** https://release.archboot.com/aarch64/latest/iso/
+- **Debian ISOs:** https://cdimage.debian.org/cdimage/release/
 - **Vagrant Cloud:** https://app.vagrantup.com/wesdemos
