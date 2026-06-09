@@ -1,0 +1,6 @@
+{
+  "author": "Wes Higbee",
+  "website": "https://github.com/g0t4/vagrant-boxes",
+  "repository": "https://github.com/g0t4/vagrant-boxes",
+  "description": "Debian 13 (Trixie) arm64 - compatible with Apple Silicon"
+}
