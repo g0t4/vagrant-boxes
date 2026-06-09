@@ -1,0 +1,13 @@
+include:
+  - sh
+  - hcl
+  - json
+  - lua
+  - md
+  - fish
+  - yaml
+  # windows:
+  - ps1
+  - bat
+ignores:
+  - "notes/"
