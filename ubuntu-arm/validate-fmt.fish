@@ -1,12 +1,14 @@
 #!/usr/bin/env fish
 
-vagrant_cloud_token
+# Use dummy credentials for validation/formatting (no real secrets needed)
+set DUMMY_CLIENT_ID "dummy"
+set DUMMY_CLIENT_SECRET "dummy"
 
 function validate
     set file $argv[1]
     packer validate -var-file="$file" \
-        -var="client_id=$VAGRANT_HCP_CLIENT_ID" \
-        -var="client_secret=$VAGRANT_HCP_CLIENT_SECRET" \
+        -var="client_id=$DUMMY_CLIENT_ID" \
+        -var="client_secret=$DUMMY_CLIENT_SECRET" \
         .
 end
 
