@@ -1,4 +1,4 @@
-include:
+include_domains:
   - sh
   - hcl
   - json
